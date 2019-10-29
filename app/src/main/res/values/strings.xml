@@ -1,3 +1,20 @@
 <resources>
     <string name="app_name">SportSpot</string>
+    <string name="alegeti_sportul_dorit">Alegeti sportul dorit:</string>
+    <string name="username">Username</string>
+    <string name="parola">Parola</string>
+    <string name="confirma_parola">Confirma parola</string>
+    <string name="inregistreaza_te">Inregistreaza-te!</string>
+    <string name="ai_deja_un_cont">Ai deja un cont? Conecteaza-te! ></string>
+    <string name="conecteaza_te">Conecteaza-te!</string>
+    <string name="nu_ai_un_cont">Nu ai un cont? Inregistreaza-te! ></string>
+
+    <string-array name="lv_sports_list">
+        <item>Fotbal</item>
+        <item>Handbal</item>
+        <item>Baschet</item>
+        <item>Volei</item>
+        <item>Rugby</item>
+        <item>Baseball</item>
+    </string-array>
 </resources>
