@@ -1,14 +1,20 @@
 package com.example.sportspot;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class AuthActivity extends AppCompatActivity {
@@ -25,6 +31,8 @@ public class AuthActivity extends AppCompatActivity {
         setContentView(R.layout.activity_auth);
         initComponents();
 
+        mAuth = FirebaseAuth.getInstance();
+
         auth_signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -33,9 +41,12 @@ public class AuthActivity extends AppCompatActivity {
             }
         });
 
-        mAuth = FirebaseAuth.getInstance();
-
-
+        auth_connect.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                connectUser();
+            }
+        });
     }
 
     private void initComponents(){
@@ -45,5 +56,46 @@ public class AuthActivity extends AppCompatActivity {
         auth_signup = findViewById(R.id.auth_signup_button);
     }
 
-    
+    private void connectUser(){
+        String textMail = auth_username.getText().toString().trim();
+        String textParola = auth_password.getText().toString().trim();
+
+        if(textMail.isEmpty()){
+            auth_username.setError("Introduceti o adresa email.");
+            auth_username.requestFocus();
+            return;
+        }
+
+        if(!Patterns.EMAIL_ADDRESS.matcher(textMail).matches()){
+            auth_username.setError("Introduceti o adresa email valida.");
+            auth_username.requestFocus();
+            return;
+        }
+
+        if(textParola.isEmpty()){
+            auth_password.setError("Introduceti o parola");
+            auth_password.requestFocus();
+            return;
+        }
+
+        if(textParola.length()<6){
+            auth_password.setError("Introduceti o parola de minim 6 caractere.");
+            auth_password.requestFocus();
+            return;
+        }
+
+        mAuth.signInWithEmailAndPassword(textMail, textParola).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if(task.isSuccessful()){
+                    intent = new Intent(AuthActivity.this, SportsListActivity.class);
+                    startActivity(intent);
+                    finish();
+                }
+                else{
+                    Toast.makeText(getApplicationContext(), R.string.auth_failed, Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+    }
 }

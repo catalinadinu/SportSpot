@@ -9,6 +9,7 @@
     <string name="conecteaza_te">Conecteaza-te!</string>
     <string name="nu_ai_un_cont">Nu ai un cont? Inregistreaza-te! ></string>
     <string name="email">Email</string>
+    <string name="auth_failed">Conectarea a esuat!</string>
 
     <string-array name="lv_sports_list">
         <item>Fotbal</item>
