@@ -17,7 +17,7 @@ public class MainActivity extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent loginIntent = new Intent(MainActivity.this, SportsListActivity.class);
+                Intent loginIntent = new Intent(MainActivity.this, AuthActivity.class);
                 startActivity(loginIntent);
                 finish();
             }
