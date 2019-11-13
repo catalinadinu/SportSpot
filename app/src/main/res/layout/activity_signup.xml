@@ -23,10 +23,12 @@
         android:ems="10"
         android:hint="@string/email"
         android:inputType="textEmailAddress"
+        android:textColorLink="@color/colorPrimary"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView2"
+        android:backgroundTint="@color/colorPrimary"/>
 
     <EditText
         android:id="@+id/signup_password"
@@ -36,9 +38,11 @@
         android:ems="10"
         android:hint="@string/parola"
         android:inputType="textPassword"
+        android:textColorLink="@color/colorPrimary"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/signup_username" />
+        app:layout_constraintTop_toBottomOf="@+id/signup_username"
+        android:backgroundTint="@color/colorPrimary"/>
 
     <EditText
         android:id="@+id/signup_confirm_password"
@@ -48,10 +52,12 @@
         android:ems="10"
         android:hint="@string/confirma_parola"
         android:inputType="textPassword"
+        android:textColorLink="@color/colorPrimary"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/signup_password" />
+        app:layout_constraintTop_toBottomOf="@+id/signup_password"
+        android:backgroundTint="@color/colorPrimary"/>
 
     <Button
         android:id="@+id/signup_create_account_button"

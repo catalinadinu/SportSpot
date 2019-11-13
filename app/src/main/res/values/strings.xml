@@ -10,6 +10,16 @@
     <string name="nu_ai_un_cont">Nu ai un cont? Inregistreaza-te! ></string>
     <string name="email">Email</string>
     <string name="auth_failed">Conectarea a esuat!</string>
+    <string name="feedback_text">Nu ai trimis inca un comentariu cu privire la aplicatie.
+        Vrei sa trimiti unul? </string>
+    <string name="feedback_score">Nu ai trimis inca o nota. Vrei sa trimiti? </string>
+    <string name="adauga_feedback">Adauga feedback</string>
+    <string name="contact">Contact</string>
+    <string name="deconectare">Deconectare</string>
+    <string name="versiune">versiunea 1.0</string>
+    <string name="contacteaza_ne">Contacteaza-ne la adresa de mail</string>
+    <string name="contact_mail">contact@sportspot.ro</string>
+
 
     <string-array name="lv_sports_list">
         <item>Fotbal</item>
