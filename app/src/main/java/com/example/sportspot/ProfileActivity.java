@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -22,7 +23,21 @@ public class ProfileActivity extends AppCompatActivity {
 
         initComponents();
 
-        
+        contact.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                intent = new Intent(ProfileActivity.this, ContactActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        add_feedback.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                intent = new Intent(ProfileActivity.this, FeedbackActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     private void initComponents(){

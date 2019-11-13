@@ -19,6 +19,9 @@
     <string name="versiune">versiunea 1.0</string>
     <string name="contacteaza_ne">Contacteaza-ne la adresa de mail</string>
     <string name="contact_mail">contact@sportspot.ro</string>
+    <string name="feedback_titlu">Spune-ne parerea ta!</string>
+    <string name="comentariu">Comentariu</string>
+    <string name="nota">Nota (intre 1 si 10)</string>
 
 
     <string-array name="lv_sports_list">
