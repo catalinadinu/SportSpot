@@ -9,7 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".FeedbackActivity"></activity>
+        <activity android:name=".VolleyballGamesActivity"></activity>
+        <activity android:name=".HandballGamesActivity" />
+        <activity android:name=".FootballGamesActivity" />
+        <activity android:name=".FeedbackActivity" />
         <activity android:name=".ContactActivity" />
         <activity android:name=".ProfileActivity" />
         <activity android:name=".SignupActivity" />

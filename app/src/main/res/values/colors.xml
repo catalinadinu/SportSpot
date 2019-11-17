@@ -3,4 +3,6 @@
     <color name="colorPrimary">#ffbf00</color>
     <color name="colorPrimaryDark">#000000</color>
     <color name="colorAccent">#ffdf80</color>
+    <color name="darkRed">#8E0000</color>
+    <color name="scoreColor">#A00000</color>
 </resources>
