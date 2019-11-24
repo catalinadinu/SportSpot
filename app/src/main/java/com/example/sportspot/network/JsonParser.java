@@ -23,6 +23,10 @@ public class JsonParser {
         try{
             JSONObject jsonObject = new JSONObject(json);
             List<Game> fotbal = getGameListFromJson(jsonObject.getJSONArray("fotbal"));
+            List<Game> handbal = getGameListFromJson(jsonObject.getJSONArray("handbal"));
+            List<Game> volei = getGameListFromJson(jsonObject.getJSONArray("volei"));
+
+            return new HttpResponse(fotbal, handbal, volei);
         } catch (JSONException e) {
             e.printStackTrace();
         }
