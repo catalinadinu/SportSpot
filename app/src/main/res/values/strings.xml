@@ -22,14 +22,17 @@
     <string name="feedback_titlu">Spune-ne parerea ta!</string>
     <string name="comentariu">Comentariu</string>
     <string name="nota">Nota (intre 1 si 10)</string>
+    <string name="rezultate_volei">Rezultate volei</string>
+    <string name="rezultate_fotbal">Rezultate fotbal</string>
+    <string name="rezultate_handbal">Rezultate handbal</string>
 
 
     <string-array name="lv_sports_list">
         <item>Fotbal</item>
         <item>Handbal</item>
-        <item>Baschet</item>
+<!--        <item>Baschet</item>-->
         <item>Volei</item>
-        <item>Rugby</item>
-        <item>Baseball</item>
+<!--        <item>Rugby</item>-->
+<!--        <item>Baseball</item>-->
     </string-array>
 </resources>

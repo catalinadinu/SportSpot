@@ -1,21 +1,23 @@
 package com.example.sportspot.network;
 
+import java.util.Date;
+
 public class ExtraInfo {
-    private String data;
+    private Date data;
     private String locatie;
     private int cartonaseRosii;
 
-    public ExtraInfo(String data, String locatie, int cartonaseRosii) {
+    public ExtraInfo(Date data, String locatie, int cartonaseRosii) {
         this.data = data;
         this.locatie = locatie;
         this.cartonaseRosii = cartonaseRosii;
     }
 
-    public String getData() {
+    public Date getData() {
         return data;
     }
 
-    public void setData(String data) {
+    public void setData(Date data) {
         this.data = data;
     }
 
