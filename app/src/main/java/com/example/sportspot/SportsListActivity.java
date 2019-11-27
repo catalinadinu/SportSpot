@@ -21,8 +21,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SportsListActivity extends AppCompatActivity {
-    private static final String URL = "https://api.myjson.com/bins/1dfcnu";
-    private HttpResponse httpResponse;
+//    private static final String URL = "https://api.myjson.com/bins/1dfcnu";
+//    private HttpResponse httpResponse;
 
     private ListView sportsListView;
     private List<Game> selectedGame = new ArrayList<>();
@@ -36,16 +36,16 @@ public class SportsListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_sports_list);
         initComponents();
 
-        new HttpManager(){
-            @Override
-            protected void onPostExecute(String s) {
-                Toast.makeText(getApplicationContext(), "Se preiau datele...", Toast.LENGTH_SHORT).show();
-                httpResponse = JsonParser.parseJson(s);
-                if(httpResponse != null){
-                    Toast.makeText(getApplicationContext(), "Datele despre rezultate au fost preluate.", Toast.LENGTH_SHORT).show();
-                }
-            }
-        }.execute(URL);
+//        new HttpManager(){
+//            @Override
+//            protected void onPostExecute(String s) {
+//                Toast.makeText(getApplicationContext(), "Se preiau datele...", Toast.LENGTH_SHORT).show();
+//                httpResponse = JsonParser.parseJson(s);
+//                if(httpResponse != null){
+//                    Toast.makeText(getApplicationContext(), "Datele despre rezultate au fost preluate.", Toast.LENGTH_SHORT).show();
+//                }
+//            }
+//        }.execute(URL);
 
         profile.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -59,17 +59,6 @@ public class SportsListActivity extends AppCompatActivity {
                 android.R.layout.simple_list_item_1);
         sportsListView.setAdapter(sportsAdapter);
 
-//        sportsListView.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-//            @Override
-//            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-//
-//            }
-//
-//            @Override
-//            public void onNothingSelected(AdapterView<?> adapterView) {
-//
-//            }
-//        });
 
         sportsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

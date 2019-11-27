@@ -25,6 +25,7 @@
     <string name="rezultate_volei">Rezultate volei</string>
     <string name="rezultate_fotbal">Rezultate fotbal</string>
     <string name="rezultate_handbal">Rezultate handbal</string>
+    <string name="listview_row_field_no_content">Nu exista date.</string>
 
 
     <string-array name="lv_sports_list">

@@ -5,4 +5,5 @@
     <color name="colorAccent">#ffdf80</color>
     <color name="darkRed">#8E0000</color>
     <color name="scoreColor">#A00000</color>
+    <color name="white">#ffffff</color>
 </resources>
