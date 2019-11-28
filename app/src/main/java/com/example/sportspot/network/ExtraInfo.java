@@ -5,7 +5,7 @@ import java.util.Date;
 public class ExtraInfo {
     private Date data;
     private String locatie;
-    private int cartonaseRosii;
+    private Integer cartonaseRosii;
 
     public ExtraInfo(Date data, String locatie, int cartonaseRosii) {
         this.data = data;
@@ -29,11 +29,11 @@ public class ExtraInfo {
         this.locatie = locatie;
     }
 
-    public int getCartonaseRosii() {
+    public Integer getCartonaseRosii() {
         return cartonaseRosii;
     }
 
-    public void setCartonaseRosii(int cartonaseRosii) {
+    public void setCartonaseRosii(Integer cartonaseRosii) {
         this.cartonaseRosii = cartonaseRosii;
     }
 

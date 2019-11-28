@@ -37,14 +37,6 @@ public class GameAdapter extends ArrayAdapter<Game> {
         this.inflater = inflater;
     }
 
-//    public GameAdapter(@NonNull Context context,
-//                       int resource,
-//                       List<Game> matches) {
-//        super(context, resource, matches);
-//        this.context = context;
-//        this.resource = resource;
-//        this.matches = matches;
-//    }
 
     @NonNull
     @Override
@@ -57,7 +49,13 @@ public class GameAdapter extends ArrayAdapter<Game> {
 
             ExtraInfo extraInfo = match.getExtraInfo();
             Date matchDate = extraInfo.getData();
+            Integer matchRedCardNumber = extraInfo.getCartonaseRosii();
+            String matchLocation = extraInfo.getLocatie();
+
             addDate(view, matchDate);
+            addRedCards(view, matchRedCardNumber);
+            addLocation(view, matchLocation);
+
         }
 
         return view;
@@ -74,7 +72,7 @@ public class GameAdapter extends ArrayAdapter<Game> {
     }
 
     private void addScore(View view, String score){
-        TextView tv = view.findViewById(R.id.lv_game_score);
+        TextView tv = view.findViewById(R.id.lv_score);
         if(score != null && !score.trim().isEmpty()){
             tv.setText(score);
         }
@@ -84,12 +82,33 @@ public class GameAdapter extends ArrayAdapter<Game> {
     }
 
     private void addDate(View view, Date matchDate){
-        TextView tv = view.findViewById(R.id.lv_game_date);
+        TextView tv = view.findViewById(R.id.lv_date);
         if(matchDate != null){
             tv.setText(new SimpleDateFormat(Const.DATE_FORMAT, Locale.US)
                     .format(matchDate));
         }
         else{
+            tv.setText(R.string.listview_row_field_no_content);
+        }
+    }
+
+    private void addRedCards(View view, Integer redCardNumber){
+        TextView tv = view.findViewById(R.id.lv_red_card);
+        if(redCardNumber != null){
+            String redCards = "Cartonase rosii: " + redCardNumber.toString();
+            tv.setText(redCards);
+        }
+        else{
+            tv.setText(R.string.listview_row_field_no_content);
+        }
+    }
+
+    private void addLocation(View view, String matchLocation){
+        TextView tv = view.findViewById(R.id.lv_location);
+        if(matchLocation != null && !matchLocation.trim().isEmpty()){
+            tv.setText(matchLocation);
+        }
+        else {
             tv.setText(R.string.listview_row_field_no_content);
         }
     }

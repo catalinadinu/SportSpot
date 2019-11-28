@@ -44,16 +44,10 @@ public class FootballGamesActivity extends AppCompatActivity {
                 }
             }
         }.execute(URL);
-
-//        if (httpResponse != null && httpResponse.getFotbal() != null){
-//            selectGame(httpResponse.getFotbal());
-//        }
     }
 
     private void initComponents(){
         lvFootballGames = findViewById(R.id.lv_football_results);
-//        ArrayAdapter<Game> adapter = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_list_item_1, footballResults);
-//        lvFootballGames.setAdapter(adapter);
 
         if(getApplicationContext() != null) {
             GameAdapter gameAdapter = new GameAdapter(getApplicationContext(), R.layout.listview_row_view, footballResults, getLayoutInflater());
