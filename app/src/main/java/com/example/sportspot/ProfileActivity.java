@@ -11,6 +11,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.sportspot.util.Feedback;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
 
@@ -48,6 +49,15 @@ public class ProfileActivity extends AppCompatActivity {
             public void onClick(View view) {
                 intent = new Intent(ProfileActivity.this, FeedbackActivity.class);
                 startActivityForResult(intent, REQUEST_CODE_ADD_FEEDBACK);
+            }
+        });
+
+        disconnect.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FirebaseAuth.getInstance().signOut();
+                intent = new Intent(ProfileActivity.this, AuthActivity.class);
+                startActivity(intent);
             }
         });
     }
