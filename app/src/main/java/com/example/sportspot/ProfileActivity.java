@@ -4,6 +4,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -26,6 +27,8 @@ public class ProfileActivity extends AppCompatActivity {
     private Intent intent;
     private Feedback feedback;
     private ArrayList<Feedback> feedbackList = new ArrayList<>();
+
+    
 
     public static final int REQUEST_CODE_ADD_FEEDBACK = 1;
 

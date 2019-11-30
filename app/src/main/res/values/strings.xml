@@ -26,6 +26,8 @@
     <string name="rezultate_fotbal">Rezultate fotbal</string>
     <string name="rezultate_handbal">Rezultate handbal</string>
     <string name="listview_row_field_no_content">Nu exista date.</string>
+    <string name="pdm_ase_ro">pdm.ase.ro</string>
+    <string name="site">sau pe site:</string>
 
 
     <string-array name="lv_sports_list">
