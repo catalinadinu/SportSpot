@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.example.sportspot.util.Feedback;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.util.ArrayList;
 
@@ -28,7 +29,6 @@ public class ProfileActivity extends AppCompatActivity {
     private Feedback feedback;
     private ArrayList<Feedback> feedbackList = new ArrayList<>();
 
-    
 
     public static final int REQUEST_CODE_ADD_FEEDBACK = 1;
 
@@ -38,6 +38,15 @@ public class ProfileActivity extends AppCompatActivity {
         setContentView(R.layout.activity_profile);
 
         initComponents();
+
+        Intent data = getIntent();
+        Feedback feedback = data.getParcelableExtra(ADD_FEEDBACK_KEY);
+        if(feedback != null) {
+            String comentariu = feedback.getComentariu();
+            String nota = String.valueOf(feedback.getNota());
+            comment.setText(comentariu);
+            score.setText(nota);
+        }
 
         contact.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -66,11 +75,16 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
     private void initComponents(){
-        comment = (TextView) findViewById(R.id.profile_comment);
-        score = (TextView) findViewById(R.id.profile_score);
+        comment = findViewById(R.id.profile_comment);
+        score = findViewById(R.id.profile_score);
         add_feedback = findViewById(R.id.profile_add_feedback);
         contact = findViewById(R.id.profile_contact);
         disconnect = findViewById(R.id.profile_disconnect);
+
+        if(feedbackList != null && feedback != null){
+            comment.setText(feedback.getComentariu());
+            score.setText(feedback.getNota());
+        }
     }
 
     @Override
@@ -85,6 +99,7 @@ public class ProfileActivity extends AppCompatActivity {
                 comment.setText(comentariu);
                 score.setText(nota);
                 feedbackList.add(feedback);
+
             }
             else {
                 Toast.makeText(getApplicationContext(), "A aparut o eroare la transmiterea feedback-ului..", Toast.LENGTH_LONG).show();
