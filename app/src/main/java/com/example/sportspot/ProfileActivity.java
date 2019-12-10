@@ -3,6 +3,7 @@ package com.example.sportspot;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -32,6 +33,17 @@ public class ProfileActivity extends AppCompatActivity {
 
     public static final int REQUEST_CODE_ADD_FEEDBACK = 1;
 
+
+    private static final String SP_FILE_NAME = "feedbackSharedPreferences";
+    private static final String SP_COMMENT = "sharedPreferencesComment";
+    public static final String SP_SCORE = "sharedPreferencesScore";
+    public static final String SP_USER = "sharedPreferenesUser";
+
+
+    private SharedPreferences sp;
+
+    private FirebaseUser user;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,13 +52,13 @@ public class ProfileActivity extends AppCompatActivity {
         initComponents();
 
         Intent data = getIntent();
-        Feedback feedback = data.getParcelableExtra(ADD_FEEDBACK_KEY);
-        if(feedback != null) {
-            String comentariu = feedback.getComentariu();
-            String nota = String.valueOf(feedback.getNota());
-            comment.setText(comentariu);
-            score.setText(nota);
-        }
+//        Feedback feedback = data.getParcelableExtra(ADD_FEEDBACK_KEY);
+//        if(feedback != null) {
+//            String comentariu = feedback.getComentariu();
+//            String nota = String.valueOf(feedback.getNota());
+//            comment.setText(comentariu);
+//            score.setText(nota);
+//        }
 
         contact.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,9 +93,30 @@ public class ProfileActivity extends AppCompatActivity {
         contact = findViewById(R.id.profile_contact);
         disconnect = findViewById(R.id.profile_disconnect);
 
-        if(feedbackList != null && feedback != null){
-            comment.setText(feedback.getComentariu());
-            score.setText(feedback.getNota());
+//        if(feedbackList != null && feedback != null){
+//            comment.setText(feedback.getComentariu());
+//            score.setText(feedback.getNota());
+//        }
+
+        sp = getSharedPreferences(SP_FILE_NAME, Context.MODE_PRIVATE);
+
+        //citire din fisierul sp
+        String commentFeedback = sp.getString(SP_COMMENT, "");
+        String scoreFeedback = sp.getString(SP_SCORE, "");
+        String emailFeedback = sp.getString(SP_USER, "");
+
+        //populare text elemente vizuale
+        String userEmail = null;
+        user = FirebaseAuth.getInstance().getCurrentUser();
+        if(user != null){
+            userEmail = user.getEmail();
+        }
+
+        if(!commentFeedback.isEmpty() && !scoreFeedback.isEmpty()){
+            if(emailFeedback.equals(userEmail)){
+                comment.setText(commentFeedback);
+                score.setText(scoreFeedback);
+            }
         }
     }
 
@@ -99,6 +132,18 @@ public class ProfileActivity extends AppCompatActivity {
                 comment.setText(comentariu);
                 score.setText(nota);
                 feedbackList.add(feedback);
+
+                String email = null;
+                user = FirebaseAuth.getInstance().getCurrentUser();
+                if(user != null){
+                    email = user.getEmail();
+                }
+
+                SharedPreferences.Editor editor = sp.edit();
+                editor.putString(SP_COMMENT, comentariu);
+                editor.putString(SP_SCORE, nota);
+                editor.putString(SP_USER, email);
+                editor.apply();
 
             }
             else {
