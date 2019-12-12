@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.sportspot.util.Const;
 import com.example.sportspot.util.Feedback;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -34,10 +35,10 @@ public class ProfileActivity extends AppCompatActivity {
     public static final int REQUEST_CODE_ADD_FEEDBACK = 1;
 
 
-    private static final String SP_FILE_NAME = "feedbackSharedPreferences";
-    private static final String SP_COMMENT = "sharedPreferencesComment";
-    public static final String SP_SCORE = "sharedPreferencesScore";
-    public static final String SP_USER = "sharedPreferenesUser";
+//    private static final String SP_FILE_NAME = "feedbackSharedPreferences";
+//    private static final String SP_COMMENT = "sharedPreferencesComment";
+//    public static final String SP_SCORE = "sharedPreferencesScore";
+//    public static final String SP_USER = "sharedPreferenesUser";
 
 
     private SharedPreferences sp;
@@ -79,7 +80,14 @@ public class ProfileActivity extends AppCompatActivity {
         disconnect.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                sp = getSharedPreferences(Const.SP_FILE_NAME, Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sp.edit();
+                editor.remove(Const.SP_EMAIL_KEY);
+                editor.remove(Const.SP_PASSWORD_KEY);
+                editor.apply();
+
                 FirebaseAuth.getInstance().signOut();
+
                 intent = new Intent(ProfileActivity.this, AuthActivity.class);
                 startActivity(intent);
             }
@@ -98,26 +106,26 @@ public class ProfileActivity extends AppCompatActivity {
 //            score.setText(feedback.getNota());
 //        }
 
-        sp = getSharedPreferences(SP_FILE_NAME, Context.MODE_PRIVATE);
+//        sp = getSharedPreferences(SP_FILE_NAME, Context.MODE_PRIVATE);
+//
+//        //citire din fisierul sp
+//        String commentFeedback = sp.getString(SP_COMMENT, "");
+//        String scoreFeedback = sp.getString(SP_SCORE, "");
+//        String emailFeedback = sp.getString(SP_USER, "");
+//
+//        //populare text elemente vizuale
+//        String userEmail = null;
+//        user = FirebaseAuth.getInstance().getCurrentUser();
+//        if(user != null){
+//            userEmail = user.getEmail();
+//        }
 
-        //citire din fisierul sp
-        String commentFeedback = sp.getString(SP_COMMENT, "");
-        String scoreFeedback = sp.getString(SP_SCORE, "");
-        String emailFeedback = sp.getString(SP_USER, "");
-
-        //populare text elemente vizuale
-        String userEmail = null;
-        user = FirebaseAuth.getInstance().getCurrentUser();
-        if(user != null){
-            userEmail = user.getEmail();
-        }
-
-        if(!commentFeedback.isEmpty() && !scoreFeedback.isEmpty()){
-            if(emailFeedback.equals(userEmail)){
-                comment.setText(commentFeedback);
-                score.setText(scoreFeedback);
-            }
-        }
+//        if(!commentFeedback.isEmpty() && !scoreFeedback.isEmpty()){
+//            if(emailFeedback.equals(userEmail)){
+//                comment.setText(commentFeedback);
+//                score.setText(scoreFeedback);
+//            }
+//        }
     }
 
     @Override
@@ -133,17 +141,17 @@ public class ProfileActivity extends AppCompatActivity {
                 score.setText(nota);
                 feedbackList.add(feedback);
 
-                String email = null;
-                user = FirebaseAuth.getInstance().getCurrentUser();
-                if(user != null){
-                    email = user.getEmail();
-                }
+//                String email = null;
+//                user = FirebaseAuth.getInstance().getCurrentUser();
+//                if(user != null){
+//                    email = user.getEmail();
+//                }
 
-                SharedPreferences.Editor editor = sp.edit();
-                editor.putString(SP_COMMENT, comentariu);
-                editor.putString(SP_SCORE, nota);
-                editor.putString(SP_USER, email);
-                editor.apply();
+//                SharedPreferences.Editor editor = sp.edit();
+//                editor.putString(SP_COMMENT, comentariu);
+//                editor.putString(SP_SCORE, nota);
+//                editor.putString(SP_USER, email);
+//                editor.apply();
 
             }
             else {
