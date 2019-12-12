@@ -3,7 +3,9 @@ package com.example.sportspot;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
@@ -12,6 +14,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.sportspot.util.Const;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -24,6 +27,7 @@ public class AuthActivity extends AppCompatActivity {
     private TextView auth_signup;
     private Intent intent;
     private FirebaseAuth mAuth;
+    private SharedPreferences sp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +51,11 @@ public class AuthActivity extends AppCompatActivity {
                 connectUser();
             }
         });
+
+        if(getUserEmailFromSP() != null){
+            Intent intentSP = new Intent(AuthActivity.this, SportsListActivity.class);
+            startActivity(intentSP);
+        }
     }
 
     private void initComponents(){
@@ -56,9 +65,30 @@ public class AuthActivity extends AppCompatActivity {
         auth_signup = findViewById(R.id.auth_signup_button);
     }
 
+    public void saveUserAuthCredentialsInSP(String email, String password){
+        sp = getSharedPreferences(Const.SP_FILE_NAME, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sp.edit();
+        editor.putString(Const.SP_EMAIL_KEY, email);
+        editor.putString(Const.SP_PASSWORD_KEY, password);
+        editor.apply();
+    }
+
+    public String getUserEmailFromSP(){
+        sp = getSharedPreferences(Const.SP_FILE_NAME, Context.MODE_PRIVATE);
+        return sp.getString(Const.SP_EMAIL_KEY, null);
+
+    }
+
+    public String getUserPasswordFromSP(){
+        sp = getSharedPreferences(Const.SP_FILE_NAME, Context.MODE_PRIVATE);
+        return sp.getString(Const.SP_PASSWORD_KEY, null);
+
+
+    }
+
     private void connectUser(){
-        String textMail = auth_username.getText().toString().trim();
-        String textParola = auth_password.getText().toString().trim();
+        final String textMail = auth_username.getText().toString().trim();
+        final String textParola = auth_password.getText().toString().trim();
 
         if(textMail.isEmpty()){
             auth_username.setError("Introduceti o adresa email.");
@@ -88,6 +118,7 @@ public class AuthActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()){
+                    saveUserAuthCredentialsInSP(textMail, textParola);
                     intent = new Intent(AuthActivity.this, SportsListActivity.class);
                     startActivity(intent);
                     finish();
