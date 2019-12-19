@@ -17,24 +17,32 @@ import com.example.sportspot.util.Const;
 public abstract class DBManager extends RoomDatabase {
     public static DBManager dbManager;
 
-    public abstract CoachDao getCoachDao();
-    public abstract TeamDao getTeamDao();
-
     private void prePopulateCoachTable(){
-        if(getCoachDao().countCoaches() == 0){
-            for(int i=0; i<Const.COACHES.length; i++){
-                getCoachDao().insertCoach(Const.COACHES[i]);
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                if(getCoachDao().countCoaches() == 0){
+                    for(int i=0; i<Const.COACHES.length; i++){
+                        getCoachDao().insertCoach(Const.COACHES[i]);
+                    }
+                }
             }
-        }
+        }).start();
+
     }
 
 
     private void prePopulateTeamTable(){
-        if(getTeamDao().countTeams() == 0){
-            for(int i=0; i<Const.TEAMS.length; i++){
-                getTeamDao().insert(Const.TEAMS[i]);
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                if(getTeamDao().countTeams() == 0){
+                    for(int i=0; i<Const.TEAMS.length; i++){
+                        getTeamDao().insert(Const.TEAMS[i]);
+                    }
+                }
             }
-        }
+        }).start();
     }
 
 
@@ -44,8 +52,8 @@ public abstract class DBManager extends RoomDatabase {
             synchronized (DBManager.class){
                 if(dbManager == null){
                     dbManager = Room.databaseBuilder(context, DBManager.class, Const.DB_NAME).fallbackToDestructiveMigration().build();
-//                    dbManager.prePopulateCoachTable();
-//                    dbManager.prePopulateTeamTable();
+                    dbManager.prePopulateCoachTable();
+                    dbManager.prePopulateTeamTable();
                     return dbManager;
                 }
             }
@@ -53,5 +61,6 @@ public abstract class DBManager extends RoomDatabase {
         return dbManager;
     }
 
-
+    public abstract CoachDao getCoachDao();
+    public abstract TeamDao getTeamDao();
 }
