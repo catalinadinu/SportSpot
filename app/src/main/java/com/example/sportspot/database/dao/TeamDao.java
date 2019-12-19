@@ -15,11 +15,14 @@ public interface TeamDao {
     @Query("select * from teams")
     List<Team> getAllTeams();
 
-    @Insert
-    String insert(Team team);
+    @Query("SELECT COUNT (*) FROM teams")
+    int countTeams();
 
     @Insert
-    void insertAllTeams(Team... teams);
+    long insert(Team team);
+
+    @Insert
+    long[] insertAllTeams(Team[] teams);
 
     @Update
     int update(Team team);

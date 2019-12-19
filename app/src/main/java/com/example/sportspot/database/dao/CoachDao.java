@@ -15,11 +15,14 @@ public interface CoachDao {
     @Query("select * from coaches")
     List<Coach> getAllCoaches();
 
+    @Query("SELECT COUNT (*) FROM coaches")
+    int countCoaches();
+
     @Insert
     long insertCoach(Coach coach);
 
     @Insert
-    void insertAllCoaches(Coach... coaches);
+    long[] insertAllCoaches(Coach[] coaches);
 
     @Update
     int updateCoach(Coach coach);

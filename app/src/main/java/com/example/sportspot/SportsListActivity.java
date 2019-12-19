@@ -28,6 +28,7 @@ public class SportsListActivity extends AppCompatActivity {
     private List<Game> selectedGame = new ArrayList<>();
 
     private ImageView profile;
+    private ImageView reports;
     private Intent intent;
 
     @Override
@@ -47,10 +48,20 @@ public class SportsListActivity extends AppCompatActivity {
 //            }
 //        }.execute(URL);
 
+
         profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 intent = new Intent(SportsListActivity.this, ProfileActivity.class);
+                startActivity(intent);
+            }
+        });
+
+
+        reports.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                intent = new Intent(SportsListActivity.this, SportsReportsActivity.class);
                 startActivity(intent);
             }
         });
@@ -85,6 +96,7 @@ public class SportsListActivity extends AppCompatActivity {
     private void initComponents(){
         sportsListView = findViewById(R.id.sports_list_lv);
         profile = findViewById(R.id.sports_list_profile_button);
+        reports = findViewById(R.id.sports_list_reports_button);
     }
 
 

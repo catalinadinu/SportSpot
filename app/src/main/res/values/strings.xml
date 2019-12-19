@@ -28,14 +28,15 @@
     <string name="listview_row_field_no_content">Nu exista date.</string>
     <string name="pdm_ase_ro">pdm.ase.ro</string>
     <string name="site">sau pe site:</string>
+    <string name="rapoarte_echipe">Rapoarte echipe</string>
 
 
     <string-array name="lv_sports_list">
         <item>Fotbal</item>
         <item>Handbal</item>
-<!--        <item>Baschet</item>-->
+        <!--        <item>Baschet</item>-->
         <item>Volei</item>
-<!--        <item>Rugby</item>-->
-<!--        <item>Baseball</item>-->
+        <!--        <item>Rugby</item>-->
+        <!--        <item>Baseball</item>-->
     </string-array>
 </resources>

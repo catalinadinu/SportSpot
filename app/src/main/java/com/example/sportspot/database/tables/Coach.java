@@ -3,14 +3,15 @@ package com.example.sportspot.database.tables;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 @Entity(tableName = "coaches")
 public class Coach implements Parcelable {
-//    @PrimaryKey(autoGenerate = true)
     @PrimaryKey
+    @NonNull
     @ColumnInfo(name = "id")
     private long id;
 

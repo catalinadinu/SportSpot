@@ -35,8 +35,8 @@ public class TeamService {
                 return null;
             }
             Team team = teams[0];
-            String id = teamDao.insert(team);
-            if (!id.equals("")) {
+            long id = teamDao.insert(team);
+            if (id != -1) {
                 team.setId(id);
                 return team;
             }

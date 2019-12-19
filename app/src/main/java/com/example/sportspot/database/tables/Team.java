@@ -3,15 +3,22 @@ package com.example.sportspot.database.tables;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 @Entity(tableName = "teams")
 public class Team implements Parcelable {
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
+    @NonNull
     @ColumnInfo(name = "id")
-    private String id;
+    long id;
+
+    @NonNull
+    @ColumnInfo(name = "code")
+    private String code;
 
     @ColumnInfo(name = "sport")
     private String sport;
@@ -34,8 +41,8 @@ public class Team implements Parcelable {
     @ColumnInfo(name = "titles_number")
     private Integer titlesNumber;
 
-    public Team(String id, String sport, String teamName, String league, Integer victories, Integer points, Integer redCards, Integer titlesNumber) {
-        this.id = id;
+    public Team(String code, String sport, String teamName, String league, Integer victories, Integer points, Integer redCards, Integer titlesNumber) {
+        this.code = code;
         this.sport = sport;
         this.teamName = teamName;
         this.league = league;
@@ -45,12 +52,73 @@ public class Team implements Parcelable {
         this.titlesNumber = titlesNumber;
     }
 
-    public String getId() {
+    @Ignore
+    public Team(long id, String code, String sport, String teamName, String league, Integer victories, Integer points, Integer redCards, Integer titlesNumber) {
+        this.id = id;
+        this.code = code;
+        this.sport = sport;
+        this.teamName = teamName;
+        this.league = league;
+        this.victories = victories;
+        this.points = points;
+        this.redCards = redCards;
+        this.titlesNumber = titlesNumber;
+    }
+
+    protected Team(Parcel in) {
+        id = in.readLong();
+        code = in.readString();
+        sport = in.readString();
+        teamName = in.readString();
+        league = in.readString();
+        if (in.readByte() == 0) {
+            victories = null;
+        } else {
+            victories = in.readInt();
+        }
+        if (in.readByte() == 0) {
+            points = null;
+        } else {
+            points = in.readInt();
+        }
+        if (in.readByte() == 0) {
+            redCards = null;
+        } else {
+            redCards = in.readInt();
+        }
+        if (in.readByte() == 0) {
+            titlesNumber = null;
+        } else {
+            titlesNumber = in.readInt();
+        }
+    }
+
+    public static final Creator<Team> CREATOR = new Creator<Team>() {
+        @Override
+        public Team createFromParcel(Parcel in) {
+            return new Team(in);
+        }
+
+        @Override
+        public Team[] newArray(int size) {
+            return new Team[size];
+        }
+    };
+
+    public long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(long id) {
         this.id = id;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
     }
 
     public String getSport() {
@@ -123,44 +191,6 @@ public class Team implements Parcelable {
                 '}';
     }
 
-    private Team(Parcel in) {
-        id = in.readString();
-        sport = in.readString();
-        teamName = in.readString();
-        league = in.readString();
-        if (in.readByte() == 0) {
-            victories = null;
-        } else {
-            victories = in.readInt();
-        }
-        if (in.readByte() == 0) {
-            points = null;
-        } else {
-            points = in.readInt();
-        }
-        if (in.readByte() == 0) {
-            redCards = null;
-        } else {
-            redCards = in.readInt();
-        }
-        if (in.readByte() == 0) {
-            titlesNumber = null;
-        } else {
-            titlesNumber = in.readInt();
-        }
-    }
-
-    public static final Creator<Team> CREATOR = new Creator<Team>() {
-        @Override
-        public Team createFromParcel(Parcel in) {
-            return new Team(in);
-        }
-
-        @Override
-        public Team[] newArray(int size) {
-            return new Team[size];
-        }
-    };
 
     @Override
     public int describeContents() {
@@ -169,7 +199,8 @@ public class Team implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel parcel, int i) {
-        parcel.writeString(id);
+        parcel.writeLong(id);
+        parcel.writeString(code);
         parcel.writeString(sport);
         parcel.writeString(teamName);
         parcel.writeString(league);

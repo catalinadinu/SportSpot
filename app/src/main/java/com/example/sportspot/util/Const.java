@@ -10,8 +10,7 @@ public class Const {
     public static final String SP_PASSWORD_KEY = "password";
     public static final String DB_NAME = "sportspot_db";
 
-    public static Coach[] prepopulateCoachTable(){
-        return new Coach[]{
+    public static Coach[] COACHES ={
                 new Coach(1,"Fotbal", "Dan Vasile Petrescu", 51, 16, "F1"),
                 new Coach(2, "fotbal", "Bogdan Arges Vintila", 47, 9, "F2"),
                 new Coach(3, "fotbal", "Victor Piturca", 63, 28, "F3"),
@@ -31,11 +30,9 @@ public class Const {
                 new Coach(17, "volei", "Bogdan Tanase", 41, 9, "V3"),
                 new Coach(18, "volei", "Razvan Parpala", 34, 3, "V4"),
                 new Coach(19, "volei", "Marius Lucian Dascalu", 36, 4, "V5")
-        };
-    }
+    };
 
-    public static Team[] prepopulateTeamTable(){
-        return new Team[]{
+    public static Team[] TEAMS = {
                 new Team("F1", "fotbal", "CFR Cluj", "Liga I", 12, 41, 7, 8),
                 new Team("F2", "fotbal", "FCSB", "Liga I", 11, 36, 9, 15),
                 new Team("F3", "fotbal", "Universitatea Craiova", "Liga I", 11, 37, 4, 1),
@@ -55,6 +52,6 @@ public class Const {
                 new Team("V3", "volei", "Zalau", "Divizia A1", 7, 20, 0, 0),
                 new Team("V4", "volei", "Gloria Buzau", "Divizia A1", 5, 16, 1, 0),
                 new Team("V5", "volei", "Unirea Dej", "Divizia A1", 5, 16, 0, 0)
-        };
-    }
+    };
 }
+
