@@ -74,4 +74,18 @@ public class CoachService {
             return coachDao.deleteCoach(coaches[0]);
         }
     }
+
+    public static class SelectCoachesBySport extends AsyncTask<String, Void, List<Coach>>{
+        public SelectCoachesBySport(Context context){
+            coachDao = DBManager.getInstance(context).getCoachDao();
+        }
+
+        @Override
+        protected List<Coach> doInBackground(String... strings) {
+            if(strings == null || strings.length == 0){
+                return null;
+            }
+            return coachDao.selectCoachesBySport(strings[0]);
+        }
+    }
 }

@@ -13,25 +13,25 @@ public class Const {
     public static final String COACHES_REPORT_INTENT_EXTRA= "coaches_report_intent_extra";
 
     public static Coach[] COACHES ={
-                new Coach(1,"Fotbal", "Dan Vasile Petrescu", 51, 16, 1),
-                new Coach(2, "fotbal", "Bogdan Arges Vintila", 47, 9, 2),
-                new Coach(3, "fotbal", "Victor Piturca", 63, 28, 3),
-                new Coach(4, "fotbal", "Bogdan Ioan Andone", 44, 8, 4),
-                new Coach(5, "fotbal", "Eduard Iordanescu", 41,9, 5),
-                new Coach(6, "fotbal", "Dusan Uhrin Jr.", 52, 17, 6),
-                new Coach(7, "fotbal", "Eugen Neagoe", 52, 14, 7),
-                new Coach(8, "handbal", "Stefan Constantin", 51, 16, 8),
-                new Coach(9, "handbal", "Horatiu Gal", 50, 11, 9),
-                new Coach(10, "handbal", "Pablo Campos Sunen", 43, 14, 10),
-                new Coach(11, "handbal", "Adrian Vasile", 37, 5, 11),
-                new Coach(12, "handbal", "Florentin Pera", 40, 17, 12),
-                new Coach(13, "handbal", "George Bogdan Burcea", 47, 24, 13),
-                new Coach(14, "handbal", "Bozo Rudic", 48, 10, 14),
-                new Coach(15, "volei", "Sergiu Stancu", 37, 5, 15),
-                new Coach(16,"volei", "Stevan Ljubicic", 38,7, 16),
-                new Coach(17, "volei", "Bogdan Tanase", 41, 9, 17),
-                new Coach(18, "volei", "Razvan Parpala", 34, 3, 18),
-                new Coach(19, "volei", "Marius Lucian Dascalu", 36, 4, 19)
+                new Coach(1,"Fotbal", "Dan Vasile Petrescu", 51, 16, 1, "CFR Cluj"),
+                new Coach(2, "fotbal", "Bogdan Arges Vintila", 47, 9, 2, "FCSB"),
+                new Coach(3, "fotbal", "Victor Piturca", 63, 28, 3, "Universitatea Craiova"),
+                new Coach(4, "fotbal", "Bogdan Ioan Andone", 44, 8, 4, "Astra Giurgiu"),
+                new Coach(5, "fotbal", "Eduard Iordanescu", 41,9, 5, "Gaz Metan Medias"),
+                new Coach(6, "fotbal", "Dusan Uhrin Jr.", 52, 17, 6, "Dinamo Bucuresti"),
+                new Coach(7, "fotbal", "Eugen Neagoe", 52, 14, 7, "FC Hermannstadt"),
+                new Coach(8, "handbal", "Stefan Constantin", 51, 16, 8, "Dinamo Bucuresti"),
+                new Coach(9, "handbal", "Horatiu Gal", 50, 11, 9, "Potaissa Turda"),
+                new Coach(10, "handbal", "Pablo Campos Sunen", 43, 14, 10, "CSM Bucuresti (MASCULIN)"),
+                new Coach(11, "handbal", "Adrian Vasile", 37, 5, 11, "CSM Bucuresti (FEMININ)"),
+                new Coach(12, "handbal", "Florentin Pera", 40, 17, 12, "Ramnicu Valcea"),
+                new Coach(13, "handbal", "George Bogdan Burcea", 47, 24, 13, "SCM Craiova"),
+                new Coach(14, "handbal", "Bozo Rudic", 48, 10, 14, "Steaua Bucuresti"),
+                new Coach(15, "volei", "Sergiu Stancu", 37, 5, 15, "Arcada Galati"),
+                new Coach(16,"volei", "Stevan Ljubicic", 38,7, 16, "Dinamo Bucuresti"),
+                new Coach(17, "volei", "Bogdan Tanase", 41, 9, 17, "Zalau"),
+                new Coach(18, "volei", "Razvan Parpala", 34, 3, 18,"Gloria Buzau"),
+                new Coach(19, "volei", "Marius Lucian Dascalu", 36, 4, 19, "Unirea Dej")
     };
 
     public static Team[] TEAMS = {

@@ -7,6 +7,7 @@ import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
+import androidx.room.Ignore;
 import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
@@ -36,6 +37,20 @@ public class Coach implements Parcelable {
     @ColumnInfo(name = "curent_coached_team_id")
     private long currentCoachedTeamId;
 
+    @ColumnInfo(name = "current_coached_team_name")
+    private String currentCoachedTeamName;
+
+    public Coach(long id, String sport, String name, Integer age, Integer coachingExperience, long currentCoachedTeamId, String currentCoachedTeamName) {
+        this.id = id;
+        this.sport = sport;
+        this.name = name;
+        this.age = age;
+        this.coachingExperience = coachingExperience;
+        this.currentCoachedTeamId = currentCoachedTeamId;
+        this.currentCoachedTeamName = currentCoachedTeamName;
+    }
+
+    @Ignore
     public Coach(long id, String sport, String name, Integer age, Integer coachingExperience, long currentCoachedTeamId) {
         this.id = id;
         this.sport = sport;
@@ -122,7 +137,13 @@ public class Coach implements Parcelable {
         this.currentCoachedTeamId = currentCoachedTeamId;
     }
 
+    public String getCurrentCoachedTeamName() {
+        return currentCoachedTeamName;
+    }
 
+    public void setCurrentCoachedTeamName(String currentCoachedTeamName) {
+        this.currentCoachedTeamName = currentCoachedTeamName;
+    }
 
     @Override
     public String toString() {

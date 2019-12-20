@@ -37,7 +37,7 @@ public class CoachAdapter extends ArrayAdapter<Coach> {
         Coach coach = coaches.get(position);
         if(coach != null){
             addCoachName(view, coach.getName());
-//            addCoachTeam();
+            addCoachTeam(view, coach.getCurrentCoachedTeamName());
             addCoachAge(view, coach.getAge());
             addCoachexperience(view, coach.getCoachingExperience());
         }

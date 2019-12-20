@@ -18,6 +18,9 @@ public interface CoachDao {
     @Query("SELECT COUNT (*) FROM coaches")
     int countCoaches();
 
+    @Query("SELECT * FROM coaches WHERE sport LIKE :chosenSport")
+    List<Coach> selectCoachesBySport(String chosenSport);
+
     @Insert
     long insertCoach(Coach coach);
 
@@ -32,4 +35,6 @@ public interface CoachDao {
 
     @Query("DELETE FROM coaches")
     public void nukeTable();
+
+
 }

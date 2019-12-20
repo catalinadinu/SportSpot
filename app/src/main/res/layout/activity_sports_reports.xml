@@ -72,4 +72,19 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/sports_reports_teams_report" />
+
+    <Button
+        android:id="@+id/sports_reports_titles_report"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="@string/raport_numar_titluri"
+        android:textStyle="bold"
+        android:background="@color/colorPrimary"
+        android:padding="12dp"
+        android:shadowRadius="@android:integer/config_longAnimTime"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sports_reports_coaches_report" />
 </androidx.constraintlayout.widget.ConstraintLayout>

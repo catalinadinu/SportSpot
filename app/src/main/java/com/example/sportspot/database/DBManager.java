@@ -13,7 +13,7 @@ import com.example.sportspot.database.tables.Coach;
 import com.example.sportspot.database.tables.Team;
 import com.example.sportspot.util.Const;
 
-@Database(entities = {Team.class, Coach.class}, version = 4, exportSchema = false)
+@Database(entities = {Team.class, Coach.class}, version = 6, exportSchema = false)
 public abstract class DBManager extends RoomDatabase {
     public static DBManager dbManager;
 
