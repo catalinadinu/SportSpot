@@ -11,7 +11,7 @@ import androidx.room.PrimaryKey;
 
 @Entity(tableName = "teams")
 public class Team implements Parcelable {
-    @PrimaryKey(autoGenerate = true)
+    @PrimaryKey
     @NonNull
     @ColumnInfo(name = "id")
     long id;

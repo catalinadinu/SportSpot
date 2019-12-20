@@ -28,9 +28,9 @@ public class Coach implements Parcelable {
     private Integer coachingExperience;
 
     @ColumnInfo(name = "curent_coached_team_id")
-    private String currentCoachedTeamId;
+    private long currentCoachedTeamId;
 
-    public Coach(long id, String sport, String name, Integer age, Integer coachingExperience, String currentCoachedTeamId) {
+    public Coach(long id, String sport, String name, Integer age, Integer coachingExperience, long currentCoachedTeamId) {
         this.id = id;
         this.sport = sport;
         this.name = name;
@@ -53,7 +53,7 @@ public class Coach implements Parcelable {
         } else {
             coachingExperience = in.readInt();
         }
-        currentCoachedTeamId = in.readString();
+        currentCoachedTeamId = in.readLong();
     }
 
     public static final Creator<Coach> CREATOR = new Creator<Coach>() {
@@ -108,11 +108,11 @@ public class Coach implements Parcelable {
         this.coachingExperience = coachingExperience;
     }
 
-    public String getCurrentCoachedTeamId() {
+    public long getCurrentCoachedTeamId() {
         return currentCoachedTeamId;
     }
 
-    public void setCurrentCoachedTeamId(String currentCoachedTeamId) {
+    public void setCurrentCoachedTeamId(long currentCoachedTeamId) {
         this.currentCoachedTeamId = currentCoachedTeamId;
     }
 
@@ -152,6 +152,6 @@ public class Coach implements Parcelable {
             parcel.writeByte((byte) 1);
             parcel.writeInt(coachingExperience);
         }
-        parcel.writeString(currentCoachedTeamId);
+        parcel.writeLong(currentCoachedTeamId);
     }
 }

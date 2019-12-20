@@ -36,8 +36,6 @@ public class SportsReportsActivity extends AppCompatActivity {
         initComponents();
         getCoachesFromDB();
 
-//        chosenSport = sportsSpinner.getSelectedItem().toString();
-
         teamsReport.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -77,7 +75,6 @@ public class SportsReportsActivity extends AppCompatActivity {
 
             }
         });
-//        chosenSport = sportsSpinner.getSelectedItem().toString();
     }
 
 
@@ -91,9 +88,6 @@ public class SportsReportsActivity extends AppCompatActivity {
                     coachesList.clear();
                     coachesList.addAll(coaches);
                     Toast.makeText(getApplicationContext(), coachesList.toString(), Toast.LENGTH_LONG).show();
-                }
-                else {
-                    Toast.makeText(getApplicationContext(), R.string.date_nepreluate, Toast.LENGTH_LONG).show();
                 }
             }
         }.execute();
