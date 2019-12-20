@@ -21,6 +21,9 @@ public interface TeamDao {
     @Query("SELECT * FROM teams WHERE sport LIKE :chosenSport")
     List<Team> selectTeamsBySport(String chosenSport);
 
+    @Query("SELECT * FROM teams WHERE titles_number>0 AND sport LIKE :chosenSport")
+    List<Team> selectTeamsWithWonTitles(String chosenSport);
+
     @Insert
     long insert(Team team);
 

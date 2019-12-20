@@ -11,48 +11,50 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.sportspot.database.service.TeamService;
+import com.example.sportspot.database.tables.Coach;
 import com.example.sportspot.database.tables.Team;
-import com.example.sportspot.network.Game;
 import com.example.sportspot.util.Const;
 import com.example.sportspot.util.TeamAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class TeamsReportActivity extends AppCompatActivity {
+public class TitlesReportActivity extends AppCompatActivity {
     private TextView chosenSportTV;
     private ListView results;
     private Intent intent;
     private String chosenSport = null;
-    private ArrayList<Team> returnedTeams = new ArrayList<>();
+    private List<Team> returnedTeams = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_teams_report);
+        setContentView(R.layout.activity_titles_report);
+
         initComponents();
     }
 
+
     private void initComponents(){
-        chosenSportTV = findViewById(R.id.teams_report_chosen_sport);
+        chosenSportTV = findViewById(R.id.titles_report_chosen_sport);
         intent = getIntent();
-        chosenSport = intent.getStringExtra(Const.TEAMS_REPORT_INTENT_EXTRA);
+        chosenSport = intent.getStringExtra(Const.TITLES_REPORT_INTENT_EXTRA);
         chosenSportTV.setText(chosenSport);
 
-        results = findViewById(R.id.teams_report_results_listview);
-
-
+        results = findViewById(R.id.titles_report_results_listview);
 
         TeamAdapter teamAdapter = new TeamAdapter(getApplicationContext(), R.layout.teams_report_listview_item, returnedTeams, getLayoutInflater());
         results.setAdapter(teamAdapter);
         teamAdapter.notifyDataSetChanged();
 
-        getTeams(chosenSport);
+        getTeamsWithWonTitles(chosenSport);
+
     }
 
+
     @SuppressLint("StaticFieldLeak")
-    private void getTeams(String chosenSport){
-        new TeamService.SelectTeamsBySport(getApplicationContext()){
+    private void getTeamsWithWonTitles(String chosenSport){
+        new TeamService.SelectTeamsWithWonTitles(getApplicationContext()){
             @Override
             protected void onPostExecute(List<Team> teams) {
                 if(teams != null){
@@ -64,5 +66,6 @@ public class TeamsReportActivity extends AppCompatActivity {
                 }
             }
         }.execute(chosenSport);
+
     }
 }

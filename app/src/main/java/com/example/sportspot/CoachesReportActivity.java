@@ -58,8 +58,6 @@ public class CoachesReportActivity extends AppCompatActivity {
 
                     ArrayAdapter<Coach> adapter = (ArrayAdapter<Coach>) results.getAdapter();
                     adapter.notifyDataSetChanged();
-
-                    Toast.makeText(getApplicationContext(), returnedCoaches.toString(), Toast.LENGTH_LONG).show();
                 }
             }
         }.execute(chosenSport);

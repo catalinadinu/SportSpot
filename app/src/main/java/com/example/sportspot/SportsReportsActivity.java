@@ -25,6 +25,7 @@ public class SportsReportsActivity extends AppCompatActivity {
     private Spinner sportsSpinner;
     private Button teamsReport;
     private Button coachesReport;
+    private Button titlesReport;
     private String chosenSport = null;
     private Intent intent;
 
@@ -54,12 +55,22 @@ public class SportsReportsActivity extends AppCompatActivity {
             }
         });
 
+        titlesReport.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                intent = new Intent(SportsReportsActivity.this, TitlesReportActivity.class);
+                intent.putExtra(Const.TITLES_REPORT_INTENT_EXTRA, chosenSport);
+                startActivity(intent);
+            }
+        });
+
     }
 
     private void initComponents(){
         sportsSpinner = findViewById(R.id.sports_reports_spinner);
         teamsReport = findViewById(R.id.sports_reports_teams_report);
         coachesReport = findViewById(R.id.sports_reports_coaches_report);
+        titlesReport = findViewById(R.id.sports_reports_titles_report);
 
         ArrayAdapter<CharSequence> spinnerAdapter = ArrayAdapter.createFromResource(getApplicationContext(), R.array.lv_sports_list, R.layout.support_simple_spinner_dropdown_item);
         sportsSpinner.setAdapter(spinnerAdapter);
@@ -87,7 +98,6 @@ public class SportsReportsActivity extends AppCompatActivity {
                 if(coaches != null){
                     coachesList.clear();
                     coachesList.addAll(coaches);
-                    Toast.makeText(getApplicationContext(), coachesList.toString(), Toast.LENGTH_LONG).show();
                 }
             }
         }.execute();

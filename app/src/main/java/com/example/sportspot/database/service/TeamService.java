@@ -85,4 +85,18 @@ public class TeamService {
             return teamDao.selectTeamsBySport(strings[0]);
         }
     }
+
+    public static class SelectTeamsWithWonTitles extends AsyncTask<String, Void, List<Team>>{
+        public SelectTeamsWithWonTitles(Context context){
+            teamDao = DBManager.getInstance(context).getTeamDao();
+        }
+
+        @Override
+        protected List<Team> doInBackground(String... strings) {
+            if(strings == null || strings.length == 0){
+                return null;
+            }
+            return teamDao.selectTeamsWithWonTitles(strings[0]);
+        }
+    }
 }
