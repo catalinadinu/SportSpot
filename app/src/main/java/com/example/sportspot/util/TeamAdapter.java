@@ -104,7 +104,7 @@ public class TeamAdapter extends ArrayAdapter<Team> {
     private void addTeamPoints(View view, Integer points){
         TextView tv = view.findViewById(R.id.tv_team_points);
         if(points != null){
-            String pts = "Victorii: " + points.toString();
+            String pts = "Puncte: " + points.toString();
             tv.setText(pts);
         }
         else{
@@ -126,7 +126,7 @@ public class TeamAdapter extends ArrayAdapter<Team> {
     private void addTeamTitles(View view, Integer teamTitles){
         TextView tv = view.findViewById(R.id.tv_team_titles);
         if(teamTitles != null){
-            String titles = "Victorii: " + teamTitles.toString();
+            String titles = "Titluri: " + teamTitles.toString();
             tv.setText(titles);
         }
         else{

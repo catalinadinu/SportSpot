@@ -45,6 +45,7 @@ public class TeamsReportActivity extends AppCompatActivity {
 
         TeamAdapter teamAdapter = new TeamAdapter(getApplicationContext(), R.layout.teams_report_listview_item, returnedTeams, getLayoutInflater());
         results.setAdapter(teamAdapter);
+        teamAdapter.notifyDataSetChanged();
 
         getTeams(chosenSport);
     }

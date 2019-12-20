@@ -18,8 +18,8 @@ public interface TeamDao {
     @Query("SELECT COUNT (*) FROM teams")
     int countTeams();
 
-    @Query("select * from teams where sport=:sp")
-    List<Team> selectTeamsBySport(String sp);
+    @Query("SELECT * FROM teams WHERE sport LIKE :chosenSport")
+    List<Team> selectTeamsBySport(String chosenSport);
 
     @Insert
     long insert(Team team);
