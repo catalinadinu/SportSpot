@@ -13,7 +13,7 @@ import com.example.sportspot.database.tables.Coach;
 import com.example.sportspot.database.tables.Team;
 import com.example.sportspot.util.Const;
 
-@Database(entities = {Team.class, Coach.class}, version = 2, exportSchema = false)
+@Database(entities = {Team.class, Coach.class}, version = 4, exportSchema = false)
 public abstract class DBManager extends RoomDatabase {
     public static DBManager dbManager;
 
@@ -45,7 +45,15 @@ public abstract class DBManager extends RoomDatabase {
         }).start();
     }
 
-
+//    private void deleteData(){
+//        new Thread(new Runnable() {
+//            @Override
+//            public void run() {
+//                getTeamDao().nukeTable();
+//                getCoachDao().nukeTable();
+//            }
+//        }).start();
+//    }
 
     public static DBManager getInstance(Context context){
         if(dbManager == null){

@@ -29,4 +29,7 @@ public interface CoachDao {
 
     @Delete
     int deleteCoach(Coach coach);
+
+    @Query("DELETE FROM coaches")
+    public void nukeTable();
 }

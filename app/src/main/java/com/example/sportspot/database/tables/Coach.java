@@ -6,9 +6,15 @@ import android.os.Parcelable;
 import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.ForeignKey;
+import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
-@Entity(tableName = "coaches")
+import static androidx.room.ForeignKey.CASCADE;
+
+@Entity(tableName = "coaches",
+        indices = {@Index(value = "curent_coached_team_id", unique = true)},
+        foreignKeys = @ForeignKey(entity = Team.class, parentColumns = "id", childColumns = "curent_coached_team_id", onDelete = CASCADE))
 public class Coach implements Parcelable {
     @PrimaryKey
     @NonNull

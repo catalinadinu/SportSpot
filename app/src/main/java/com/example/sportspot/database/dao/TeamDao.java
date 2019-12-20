@@ -18,6 +18,9 @@ public interface TeamDao {
     @Query("SELECT COUNT (*) FROM teams")
     int countTeams();
 
+    @Query("select * from teams where sport=:sp")
+    List<Team> selectTeamsBySport(String sp);
+
     @Insert
     long insert(Team team);
 
@@ -29,4 +32,7 @@ public interface TeamDao {
 
     @Delete
     int delete(Team team);
+
+    @Query("DELETE FROM teams")
+    public void nukeTable();
 }

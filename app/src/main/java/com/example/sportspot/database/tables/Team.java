@@ -6,8 +6,11 @@ import android.os.Parcelable;
 import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.ForeignKey;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
+
+import static androidx.room.ForeignKey.CASCADE;
 
 @Entity(tableName = "teams")
 public class Team implements Parcelable {
