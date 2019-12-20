@@ -29,6 +29,10 @@
     <string name="pdm_ase_ro">pdm.ase.ro</string>
     <string name="site">sau pe site:</string>
     <string name="rapoarte_echipe">Rapoarte echipe</string>
+    <string name="date_nepreluate">Datele nu au putut fi preluate</string>
+    <string name="alegeti_sport">Alegeti sportul pentru care doriti vizualizarea raportului</string>
+    <string name="raport_antrenori">Raport antrenori</string>
+    <string name="raport_echipe">Raport echipe</string>
 
 
     <string-array name="lv_sports_list">

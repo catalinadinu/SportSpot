@@ -45,6 +45,7 @@
 
     <ImageView
         android:id="@+id/sports_list_reports_button"
+        android:foregroundGravity="center_horizontal"
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_marginTop="16dp"

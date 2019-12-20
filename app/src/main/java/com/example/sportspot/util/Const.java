@@ -9,6 +9,8 @@ public class Const {
     public static final String SP_EMAIL_KEY = "email";
     public static final String SP_PASSWORD_KEY = "password";
     public static final String DB_NAME = "sportspot_db";
+    public static final String TEAMS_REPORT_INTENT_EXTRA = "teams_report_intent_extra";
+    public static final String COACHES_REPORT_INTENT_EXTRA= "coaches_report_intent_extra";
 
     public static Coach[] COACHES ={
                 new Coach(1,"Fotbal", "Dan Vasile Petrescu", 51, 16, "F1"),
