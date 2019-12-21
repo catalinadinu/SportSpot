@@ -35,6 +35,7 @@
     <string name="raport_echipe">Raport echipe</string>
     <string name="raport_numar_titluri">Raport numar titluri</string>
     <string name="raport_titluri_castigate">Raport echipe cu titluri castigate</string>
+    <string name="salveaza_raportul_in_fisier_txt">Salveaza raportul in fisier txt</string>
 
 
     <string-array name="lv_sports_list">
