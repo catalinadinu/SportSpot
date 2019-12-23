@@ -6,10 +6,21 @@ import android.os.Parcelable;
 public class Feedback implements Parcelable {
     private String comentariu;
     private int nota;
+    private String user;
+
+    public Feedback(){
+
+    }
 
     public Feedback(String comentariu, int nota) {
         this.comentariu = comentariu;
         this.nota = nota;
+    }
+
+    public Feedback(String comentariu, int nota, String user) {
+        this.comentariu = comentariu;
+        this.nota = nota;
+        this.user = user;
     }
 
     protected Feedback(Parcel in) {
@@ -45,6 +56,13 @@ public class Feedback implements Parcelable {
         this.nota = nota;
     }
 
+    public String getUser() {
+        return user;
+    }
+
+    public void setUser(String user) {
+        this.user = user;
+    }
 
     @Override
     public int describeContents() {

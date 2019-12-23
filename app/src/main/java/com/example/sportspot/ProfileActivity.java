@@ -1,5 +1,6 @@
 package com.example.sportspot;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -16,6 +17,11 @@ import com.example.sportspot.util.Const;
 import com.example.sportspot.util.Feedback;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
@@ -31,19 +37,12 @@ public class ProfileActivity extends AppCompatActivity {
     private Feedback feedback;
     private ArrayList<Feedback> feedbackList = new ArrayList<>();
 
-
     public static final int REQUEST_CODE_ADD_FEEDBACK = 1;
-
-
-//    private static final String SP_FILE_NAME = "feedbackSharedPreferences";
-//    private static final String SP_COMMENT = "sharedPreferencesComment";
-//    public static final String SP_SCORE = "sharedPreferencesScore";
-//    public static final String SP_USER = "sharedPreferenesUser";
-
 
     private SharedPreferences sp;
 
-    private FirebaseUser user;
+
+    private DatabaseReference mDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,15 +50,6 @@ public class ProfileActivity extends AppCompatActivity {
         setContentView(R.layout.activity_profile);
 
         initComponents();
-
-        Intent data = getIntent();
-//        Feedback feedback = data.getParcelableExtra(ADD_FEEDBACK_KEY);
-//        if(feedback != null) {
-//            String comentariu = feedback.getComentariu();
-//            String nota = String.valueOf(feedback.getNota());
-//            comment.setText(comentariu);
-//            score.setText(nota);
-//        }
 
         contact.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -101,31 +91,11 @@ public class ProfileActivity extends AppCompatActivity {
         contact = findViewById(R.id.profile_contact);
         disconnect = findViewById(R.id.profile_disconnect);
 
-//        if(feedbackList != null && feedback != null){
-//            comment.setText(feedback.getComentariu());
-//            score.setText(feedback.getNota());
-//        }
+        mDatabase = FirebaseDatabase.getInstance().getReference("feedback").push();
 
-//        sp = getSharedPreferences(SP_FILE_NAME, Context.MODE_PRIVATE);
-//
-//        //citire din fisierul sp
-//        String commentFeedback = sp.getString(SP_COMMENT, "");
-//        String scoreFeedback = sp.getString(SP_SCORE, "");
-//        String emailFeedback = sp.getString(SP_USER, "");
-//
-//        //populare text elemente vizuale
-//        String userEmail = null;
-//        user = FirebaseAuth.getInstance().getCurrentUser();
-//        if(user != null){
-//            userEmail = user.getEmail();
-//        }
+        getFeedbackFromFirebase();
 
-//        if(!commentFeedback.isEmpty() && !scoreFeedback.isEmpty()){
-//            if(emailFeedback.equals(userEmail)){
-//                comment.setText(commentFeedback);
-//                score.setText(scoreFeedback);
-//            }
-//        }
+
     }
 
     @Override
@@ -134,30 +104,58 @@ public class ProfileActivity extends AppCompatActivity {
         if(requestCode == REQUEST_CODE_ADD_FEEDBACK && resultCode == RESULT_OK && data != null){
             feedback = data.getParcelableExtra(ADD_FEEDBACK_KEY);
             if(feedback != null){
-                Toast.makeText(getApplicationContext(), "Feedback-ul a fost transmis cu succes.", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), R.string.feedback_succes, Toast.LENGTH_LONG).show();
                 String comentariu = feedback.getComentariu();
                 String nota = String.valueOf(feedback.getNota());
                 comment.setText(comentariu);
                 score.setText(nota);
-                feedbackList.add(feedback);
 
-//                String email = null;
-//                user = FirebaseAuth.getInstance().getCurrentUser();
-//                if(user != null){
-//                    email = user.getEmail();
-//                }
+                String user = FirebaseAuth.getInstance().getCurrentUser().getEmail();
+                feedback.setUser(user);
 
-//                SharedPreferences.Editor editor = sp.edit();
-//                editor.putString(SP_COMMENT, comentariu);
-//                editor.putString(SP_SCORE, nota);
-//                editor.putString(SP_USER, email);
-//                editor.apply();
+                mDatabase.setValue(feedback);
 
             }
             else {
-                Toast.makeText(getApplicationContext(), "A aparut o eroare la transmiterea feedback-ului..", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), R.string.feedback_fail, Toast.LENGTH_LONG).show();
             }
 
         }
+    }
+
+    private void getFeedbackFromFirebase(){
+        FirebaseDatabase.getInstance().getReference().child("feedback").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for(DataSnapshot child : dataSnapshot.getChildren()){
+
+                    String user = child.getValue(Feedback.class).getUser();
+                    String comment = child.getValue(Feedback.class).getComentariu();
+                    int score = child.getValue(Feedback.class).getNota();
+                    Feedback f = new Feedback();
+                    f.setComentariu(comment);
+                    f.setNota(score);
+                    f.setUser(user);
+
+                    if (user.equals(FirebaseAuth.getInstance().getCurrentUser().getEmail())) {
+                        feedbackList.add(f);
+                    }
+                }
+                if(feedbackList != null && !feedbackList.isEmpty()){
+                    int position = feedbackList.size() - 1;
+                    feedback = feedbackList.get(position);
+                    String c = "Comentariu: " + feedback.getComentariu();
+                    String s = "Nota: " + String.valueOf(feedback.getNota());
+                    comment.setText(c);
+                    score.setText(s);
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
 }
