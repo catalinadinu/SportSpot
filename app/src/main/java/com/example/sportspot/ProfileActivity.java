@@ -7,9 +7,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,14 +35,18 @@ public class ProfileActivity extends AppCompatActivity {
     private Button add_feedback;
     private Button contact;
     private Button disconnect;
+    private Button chooseImage;
     private Intent intent;
+    private ImageView profileImage;
     private Feedback feedback;
     private ArrayList<Feedback> feedbackList = new ArrayList<>();
 
+    private Uri imageUri;
+
     public static final int REQUEST_CODE_ADD_FEEDBACK = 1;
+    public static final int REQUEST_CODE_CHOOSE_IMAGE = 2;
 
     private SharedPreferences sp;
-
 
     private DatabaseReference mDatabase;
 
@@ -50,6 +56,16 @@ public class ProfileActivity extends AppCompatActivity {
         setContentView(R.layout.activity_profile);
 
         initComponents();
+
+        chooseImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                intent = new Intent();
+                intent.setType("image/*");
+                intent.setAction(Intent.ACTION_GET_CONTENT);
+                startActivityForResult(intent, REQUEST_CODE_CHOOSE_IMAGE);
+            }
+        });
 
         contact.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -85,6 +101,8 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
     private void initComponents(){
+        profileImage = findViewById(R.id.profile_image);
+        chooseImage = findViewById(R.id.profile_upload_image_button);
         comment = findViewById(R.id.profile_comment);
         score = findViewById(R.id.profile_score);
         add_feedback = findViewById(R.id.profile_add_feedback);
@@ -94,7 +112,6 @@ public class ProfileActivity extends AppCompatActivity {
         mDatabase = FirebaseDatabase.getInstance().getReference("feedback").push();
 
         getFeedbackFromFirebase();
-
 
     }
 
@@ -120,6 +137,12 @@ public class ProfileActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), R.string.feedback_fail, Toast.LENGTH_LONG).show();
             }
 
+        }
+
+        if(requestCode == REQUEST_CODE_CHOOSE_IMAGE && resultCode == RESULT_OK
+                && data != null && data.getData() != null){
+            imageUri = data.getData();
+            profileImage.setImageURI(imageUri);
         }
     }
 
@@ -158,4 +181,6 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
     }
+
+
 }
