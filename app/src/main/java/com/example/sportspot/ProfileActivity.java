@@ -9,7 +9,9 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.View;
@@ -35,10 +37,15 @@ import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.squareup.picasso.Picasso;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 
 import static com.example.sportspot.FeedbackActivity.ADD_FEEDBACK_KEY;
@@ -50,12 +57,15 @@ public class ProfileActivity extends AppCompatActivity {
     private Button contact;
     private Button disconnect;
     private Button chooseImage;
+    private Button chooseAvatar;
     private Intent intent;
     private ImageView profileImage;
     private Feedback feedback;
     private ArrayList<Feedback> feedbackList = new ArrayList<>();
 
     private Uri imageUri;
+
+    private String avatarUrl = "https://i.pinimg.com/originals/78/54/84/7854843699c1893928012a442386a129.jpg";
 
     public static final int REQUEST_CODE_ADD_FEEDBACK = 1;
     public static final int REQUEST_CODE_CHOOSE_IMAGE = 2;
@@ -80,6 +90,13 @@ public class ProfileActivity extends AppCompatActivity {
                 intent.setType("image/*");
                 intent.setAction(Intent.ACTION_GET_CONTENT);
                 startActivityForResult(intent, REQUEST_CODE_CHOOSE_IMAGE);
+            }
+        });
+
+        chooseAvatar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Picasso.get().load(avatarUrl).into(profileImage);
             }
         });
 
@@ -122,6 +139,7 @@ public class ProfileActivity extends AppCompatActivity {
 
         profileImage = findViewById(R.id.profile_image);
         chooseImage = findViewById(R.id.profile_upload_image_button);
+        chooseAvatar = findViewById(R.id.profile_upload_avatar_button);
         comment = findViewById(R.id.profile_comment);
         score = findViewById(R.id.profile_score);
         add_feedback = findViewById(R.id.profile_add_feedback);
@@ -239,5 +257,23 @@ public class ProfileActivity extends AppCompatActivity {
         }
     }
 
+    private Bitmap getBitmapfromURL(String avatarUrl)
+    {
+        try
+        {
+            URL url = new URL(avatarUrl);
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setDoInput(true);
+            connection.connect();
+            InputStream input = connection.getInputStream();
+            Bitmap bitmap = BitmapFactory.decodeStream(input);
+            return bitmap;
 
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            return null;
+
+        }
+    }
 }

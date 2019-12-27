@@ -40,6 +40,8 @@
     <string name="feedback_fail">A aparut o eroare la transmiterea feedback-ului..</string>
     <string name="photo_upload_succes">Fotografia a fost incarcata cu succes!</string>
     <string name="photo_upload_fail">Incarcarea a esuat!</string>
+    <string name="adauga_un_avatar">Adauga un avatar</string>
+    <string name="adauga_o_poza_de_profil">Adauga o poza de profil</string>
 
 
     <string-array name="lv_sports_list">
