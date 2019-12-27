@@ -38,6 +38,8 @@
     <string name="salveaza_raportul_in_fisier_txt">Salveaza raportul in fisier txt</string>
     <string name="feedback_succes">Feedback-ul a fost transmis cu succes.</string>
     <string name="feedback_fail">A aparut o eroare la transmiterea feedback-ului..</string>
+    <string name="photo_upload_succes">Fotografia a fost incarcata cu succes!</string>
+    <string name="photo_upload_fail">Incarcarea a esuat!</string>
 
 
     <string-array name="lv_sports_list">

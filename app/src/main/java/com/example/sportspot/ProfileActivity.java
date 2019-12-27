@@ -7,8 +7,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -17,6 +20,10 @@ import android.widget.Toast;
 
 import com.example.sportspot.util.Const;
 import com.example.sportspot.util.Feedback;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -24,7 +31,14 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FileDownloadTask;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import static com.example.sportspot.FeedbackActivity.ADD_FEEDBACK_KEY;
@@ -49,6 +63,8 @@ public class ProfileActivity extends AppCompatActivity {
     private SharedPreferences sp;
 
     private DatabaseReference mDatabase;
+    private FirebaseStorage storage;
+    StorageReference storageReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -101,6 +117,9 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
     private void initComponents(){
+        storage = FirebaseStorage.getInstance();
+        storageReference = storage.getReference();
+
         profileImage = findViewById(R.id.profile_image);
         chooseImage = findViewById(R.id.profile_upload_image_button);
         comment = findViewById(R.id.profile_comment);
@@ -108,6 +127,9 @@ public class ProfileActivity extends AppCompatActivity {
         add_feedback = findViewById(R.id.profile_add_feedback);
         contact = findViewById(R.id.profile_contact);
         disconnect = findViewById(R.id.profile_disconnect);
+
+
+        getImageFromFirebaseStorage();
 
         mDatabase = FirebaseDatabase.getInstance().getReference("feedback").push();
 
@@ -143,6 +165,24 @@ public class ProfileActivity extends AppCompatActivity {
                 && data != null && data.getData() != null){
             imageUri = data.getData();
             profileImage.setImageURI(imageUri);
+            try{
+                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), imageUri);
+                profileImage.setImageBitmap(bitmap);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            StorageReference ref = storageReference.child(FirebaseAuth.getInstance().getCurrentUser().getEmail());
+            ref.putFile(imageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                    Toast.makeText(getApplicationContext(), R.string.photo_upload_succes, Toast.LENGTH_SHORT).show();
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Toast.makeText(getApplicationContext(), R.string.photo_upload_fail, Toast.LENGTH_SHORT).show();
+                }
+            });
         }
     }
 
@@ -180,6 +220,23 @@ public class ProfileActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    private void getImageFromFirebaseStorage(){
+        StorageReference ref = storageReference.child(FirebaseAuth.getInstance().getCurrentUser().getEmail());
+        try{
+            final File file = File.createTempFile("image", "jpg");
+            ref.getFile(file).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+                @Override
+                public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+                    Bitmap bitmap = BitmapFactory.decodeFile(file.getAbsolutePath());
+                    profileImage.setImageBitmap(bitmap);
+                }
+            });
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 
