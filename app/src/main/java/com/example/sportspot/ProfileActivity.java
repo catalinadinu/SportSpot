@@ -4,12 +4,13 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.drawable.Drawable;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -22,12 +23,9 @@ import android.widget.Toast;
 
 import com.example.sportspot.util.Const;
 import com.example.sportspot.util.Feedback;
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -39,14 +37,16 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
 
 import static com.example.sportspot.FeedbackActivity.ADD_FEEDBACK_KEY;
 
@@ -64,8 +64,11 @@ public class ProfileActivity extends AppCompatActivity {
     private ArrayList<Feedback> feedbackList = new ArrayList<>();
 
     private Uri imageUri;
+    private Uri avatarUri;
 
-    private String avatarUrl = "https://i.pinimg.com/originals/78/54/84/7854843699c1893928012a442386a129.jpg";
+    private String avatarUrl = "https://cdn3.vectorstock.com/i/1000x1000/11/27/athlete-sport-avatar-icon-image-vector-15791127.jpg";
+    private Bitmap avatarBitmap;
+    byte[] data;
 
     public static final int REQUEST_CODE_ADD_FEEDBACK = 1;
     public static final int REQUEST_CODE_CHOOSE_IMAGE = 2;
@@ -96,7 +99,31 @@ public class ProfileActivity extends AppCompatActivity {
         chooseAvatar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 Picasso.get().load(avatarUrl).into(profileImage);
+//
+//                //preluare bitmap imagine
+//                profileImage.setDrawingCacheEnabled(true);
+//                profileImage.buildDrawingCache();
+//                avatarBitmap = ((BitmapDrawable) profileImage.getDrawable()).getBitmap();
+//                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+//                avatarBitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+//                byte[] data = baos.toByteArray();
+
+                //salvare imagine in Firebase Storage
+//                StorageReference ref = storageReference.child(FirebaseAuth.getInstance().getCurrentUser().getEmail());
+//                UploadTask uploadTask = ref.putBytes(data);
+//                uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+//                    @Override
+//                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+//                        Toast.makeText(getApplicationContext(), R.string.photo_upload_succes, Toast.LENGTH_SHORT).show();
+//                    }
+//                }).addOnFailureListener(new OnFailureListener() {
+//                    @Override
+//                    public void onFailure(@NonNull Exception e) {
+//                        Toast.makeText(getApplicationContext(), R.string.photo_upload_fail, Toast.LENGTH_SHORT).show();
+//                    }
+//                });
             }
         });
 
@@ -257,23 +284,35 @@ public class ProfileActivity extends AppCompatActivity {
         }
     }
 
-    private Bitmap getBitmapfromURL(String avatarUrl)
-    {
-        try
-        {
-            URL url = new URL(avatarUrl);
-            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-            connection.setDoInput(true);
-            connection.connect();
-            InputStream input = connection.getInputStream();
-            Bitmap bitmap = BitmapFactory.decodeStream(input);
-            return bitmap;
+    public void getBitmapFromURL(final String avatarUrl){
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try{
+                    URL url = new URL(avatarUrl);
+                    HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+                    httpURLConnection.setDoInput(true);
+                    httpURLConnection.connect();
 
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-            return null;
+                    InputStream inputStream = httpURLConnection.getInputStream();
 
-        }
+                    avatarBitmap = BitmapFactory.decodeStream(inputStream);
+                }
+                catch (IOException e){
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+
     }
+
+    public Uri getImageUriFromBitmap(Context inContext, Bitmap bitmap) {
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.US).format(new Date());
+        String imageFileName = timeStamp + "_JPEG" ;
+        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+        String path = MediaStore.Images.Media.insertImage(inContext.getContentResolver(), bitmap, imageFileName, null);
+        return Uri.parse(path);
+    }
+
 }

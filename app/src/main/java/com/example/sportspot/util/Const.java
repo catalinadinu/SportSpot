@@ -15,6 +15,7 @@ public class Const {
     public static final String TITLES_REPORT_FILE_NAME = "titles_report.txt";
     public static final String TEAMS_REPORT_FILE_NAME = "teams_report.txt";
     public static final String COACHES_REPORT_FILE_NAME = "coaches_report.txt";
+    public static final String CONTACT_MAPVIEW_BUNDLE_KEY = "contactMapViewBundleKey";
 
     public static Coach[] COACHES ={
                 new Coach(1,"Fotbal", "Dan Vasile Petrescu", 51, 16, 1, "CFR Cluj"),
