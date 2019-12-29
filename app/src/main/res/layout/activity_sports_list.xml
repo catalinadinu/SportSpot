@@ -45,12 +45,12 @@
 
     <ImageView
         android:id="@+id/sports_list_reports_button"
-        android:foregroundGravity="center_horizontal"
         android:layout_width="30dp"
         android:layout_height="30dp"
+        android:layout_marginStart="24dp"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="136dp"
-        app:layout_constraintEnd_toStartOf="@+id/sports_list_profile_button"
+        android:foregroundGravity="center_horizontal"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/reports" />
 
