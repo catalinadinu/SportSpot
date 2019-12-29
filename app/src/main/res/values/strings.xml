@@ -42,6 +42,7 @@
     <string name="photo_upload_fail">Incarcarea a esuat!</string>
     <string name="adauga_un_avatar">Adauga un avatar</string>
     <string name="adauga_o_poza_de_profil">Adauga o poza de profil</string>
+    <string name="raport_grafic_cartonase_rosii">Raport grafic cartonase rosii</string>
 
 
     <string-array name="lv_sports_list">

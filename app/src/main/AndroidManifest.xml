@@ -3,9 +3,9 @@
     package="com.example.sportspot">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_INTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.STORAGE"/>
+    <uses-permission android:name="android.permission.STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -14,10 +14,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".RedCardsGraphReportActivity"></activity>
 
-        <meta-data android:name="com.google.android.geo.API_KEY" android:value="AIzaSyAjiv8nBY9YEArqwST9vZM-tuJKYAFB5Yw"/>
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyAjiv8nBY9YEArqwST9vZM-tuJKYAFB5Yw" />
 
-        <activity android:name=".TitlesReportActivity"></activity>
+        <activity android:name=".TitlesReportActivity" />
         <activity android:name=".CoachesReportActivity" />
         <activity android:name=".TeamsReportActivity" />
         <activity android:name=".SportsReportsActivity" />

@@ -26,6 +26,7 @@ public class SportsReportsActivity extends AppCompatActivity {
     private Button teamsReport;
     private Button coachesReport;
     private Button titlesReport;
+    private Button redCardsReport;
     private String chosenSport = null;
     private Intent intent;
 
@@ -64,6 +65,15 @@ public class SportsReportsActivity extends AppCompatActivity {
             }
         });
 
+        redCardsReport.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                intent = new Intent(SportsReportsActivity.this, RedCardsGraphReportActivity.class);
+                intent.putExtra(Const.RED_CARDS_REPORT_INTENT_EXTRA, chosenSport);
+                startActivity(intent);
+            }
+        });
+
     }
 
     private void initComponents(){
@@ -71,6 +81,7 @@ public class SportsReportsActivity extends AppCompatActivity {
         teamsReport = findViewById(R.id.sports_reports_teams_report);
         coachesReport = findViewById(R.id.sports_reports_coaches_report);
         titlesReport = findViewById(R.id.sports_reports_titles_report);
+        redCardsReport = findViewById(R.id.sports_reports_red_cards_report);
 
         ArrayAdapter<CharSequence> spinnerAdapter = ArrayAdapter.createFromResource(getApplicationContext(), R.array.lv_sports_list, R.layout.support_simple_spinner_dropdown_item);
         sportsSpinner.setAdapter(spinnerAdapter);
