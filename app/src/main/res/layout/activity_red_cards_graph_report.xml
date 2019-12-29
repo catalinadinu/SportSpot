@@ -22,7 +22,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/teams_report_chosen_sport"
+        android:id="@+id/red_cards_report_chosen_sport"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -31,4 +31,18 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView18" />
+
+    <com.github.mikephil.charting.charts.BarChart
+        android:id="@+id/red_cards_report_graph"
+        android:layout_width="match_parent"
+        android:layout_height="450dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/red_cards_report_chosen_sport">
+
+    </com.github.mikephil.charting.charts.BarChart>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
