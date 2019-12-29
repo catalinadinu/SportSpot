@@ -15,9 +15,12 @@ import com.example.sportspot.database.service.TeamService;
 import com.example.sportspot.database.tables.Team;
 import com.example.sportspot.util.Const;
 import com.github.mikephil.charting.charts.BarChart;
+import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
+import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
+import com.github.mikephil.charting.formatter.LargeValueFormatter;
 import com.github.mikephil.charting.interfaces.datasets.IBarDataSet;
 import com.github.mikephil.charting.utils.ColorTemplate;
 
@@ -28,8 +31,9 @@ public class RedCardsGraphReportActivity extends AppCompatActivity {
     private TextView chosenSportTV;
     private Intent intent;
     private String chosenSport = null;
+    private TextView teamNamesTV;
     private ArrayList<Team> returnedTeams = new ArrayList<>();
-    private ArrayList<String> teamNames = new ArrayList<>();
+    private ArrayList<String> teamCodes = new ArrayList<>();
     private ArrayList<BarEntry> redCardsEntries = new ArrayList<>();
 
     private BarChart barChart;
@@ -47,7 +51,7 @@ public class RedCardsGraphReportActivity extends AppCompatActivity {
         intent = getIntent();
         chosenSport = intent.getStringExtra(Const.RED_CARDS_REPORT_INTENT_EXTRA);
         chosenSportTV.setText(chosenSport);
-
+        teamNamesTV = findViewById(R.id.red_cards_report_team_names);
         getTeams(chosenSport);
     }
 
@@ -60,24 +64,30 @@ public class RedCardsGraphReportActivity extends AppCompatActivity {
                     returnedTeams.clear();
                     returnedTeams.addAll(teams);
 
+                    String teamNamesResult = "";
                     int i = 0;
                     for(Team t:returnedTeams){
-                        teamNames.add(t.getTeamName());
+                        teamCodes.add(t.getCode());
                         redCardsEntries.add(new BarEntry(i, t.getRedCards()));
                         i++;
+                        teamNamesResult = teamNamesResult + t.getCode() + " - " + t.getTeamName() + "\n";
                     }
-                    Toast.makeText(getApplicationContext(), teamNames.toString(), Toast.LENGTH_SHORT).show();
 
                     BarDataSet barDataSet = new BarDataSet(redCardsEntries, "Cartonase rosii");
                     barDataSet.setColors(ColorTemplate.VORDIPLOM_COLORS);
                     BarData barData = new BarData(barDataSet);
-                    barData.setBarWidth(0.9f);
+                    barData.setValueFormatter(new LargeValueFormatter());
+
                     barChart.setData(barData);
                     barChart.setTouchEnabled(true);
                     barChart.setDragEnabled(true);
                     barChart.setScaleEnabled(true);
+                    barChart.getDescription().setText("Reprezentarea grafica a numarului de cartonase rosii obtinut de fiecare echipa");
 
+                    XAxis xAxis = barChart.getXAxis();
+                    xAxis.setValueFormatter(new IndexAxisValueFormatter(teamCodes));
 
+                    teamNamesTV.setText(teamNamesResult);
                 }
             }
         }.execute(chosenSport);
