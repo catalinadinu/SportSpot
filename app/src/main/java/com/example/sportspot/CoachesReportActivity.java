@@ -59,7 +59,7 @@ public class CoachesReportActivity extends AppCompatActivity {
                         fos.write(age.getBytes());
                         fos.write(experience.getBytes());
                     }
-                    Toast.makeText(getApplicationContext(), "Datele au fost salvate la adresa " + directory, Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), getString(R.string.datele_au_fost_salvate_la_adresa) + directory, Toast.LENGTH_LONG).show();
 
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();

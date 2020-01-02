@@ -33,7 +33,7 @@ public class FeedbackActivity extends AppCompatActivity {
             public void onClick(View view) {
                 if(valid()){
                     Feedback feedback = createFeedbackFromView();
-                    Toast.makeText(getApplicationContext(), "Date preluate cu succes!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), R.string.datele_au_fost_preluate_cu_succes, Toast.LENGTH_SHORT).show();
                     intent.putExtra(ADD_FEEDBACK_KEY, feedback);
                     setResult(RESULT_OK, intent);
                     finish();
@@ -50,7 +50,7 @@ public class FeedbackActivity extends AppCompatActivity {
 
     private boolean valid(){
         if(comentariu.getText() == null || comentariu.getText().toString().trim().isEmpty()){
-            comentariu.setError("Introduceti un comentariu!");
+            comentariu.setError(getString(R.string.introduceti_un_comentariu));
             comentariu.requestFocus();
             return false;
         }
@@ -58,7 +58,7 @@ public class FeedbackActivity extends AppCompatActivity {
         if(nota.getText() == null || nota.getText().toString().trim().isEmpty() ||
             Integer.parseInt(String.valueOf(nota.getText())) < 1 ||
             Integer.parseInt(String.valueOf(nota.getText())) >10){
-                nota.setError("Nota max: 10, nota min: 1");
+                nota.setError(getString(R.string.nota_max_min));
                 nota.requestFocus();
                 return false;
         }

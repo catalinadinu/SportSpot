@@ -33,10 +33,10 @@ public class FootballGamesActivity extends AppCompatActivity {
         new HttpManager(){
             @Override
             protected void onPostExecute(String s) {
-                Toast.makeText(getApplicationContext(), "Se preiau datele...", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), R.string.se_preiau_datele, Toast.LENGTH_SHORT).show();
                 httpResponse = JsonParser.parseJson(s);
                 if(httpResponse != null){
-                    Toast.makeText(getApplicationContext(), "Datele au fost preluate cu succes.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), R.string.datele_au_fost_preluate_cu_succes, Toast.LENGTH_SHORT).show();
                 }
 
                 if (httpResponse != null && httpResponse.getFotbal() != null){

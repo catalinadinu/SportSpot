@@ -43,14 +43,26 @@
     <string name="adauga_un_avatar">Adauga un avatar</string>
     <string name="adauga_o_poza_de_profil">Adauga o poza de profil</string>
     <string name="raport_grafic_cartonase_rosii">Raport grafic cartonase rosii</string>
+    <string name="introduceti_mail">Introduceti o adresa de email.</string>
+    <string name="introduceti_mail_valid">Introduceti o adresa email valida.</string>
+    <string name="introduceti_parola">Introduceti o parola</string>
+    <string name="introduceti_parola_6_caractere">Introduceti o parola de minim 6 caractere.</string>
+    <string name="datele_au_fost_salvate_la_adresa">Datele au fost salvate la adresa</string>
+    <string name="datele_au_fost_preluate_cu_succes">Date preluate cu succes!</string>
+    <string name="introduceti_un_comentariu">Introduceti un comentariu!</string>
+    <string name="nota_max_min">Nota max: 10, nota min: 1</string>
+    <string name="se_preiau_datele">Se preiau datele...</string>
+    <string name="reprezentare_grafica_nr_cartonase_rosii">Reprezentarea grafica a numarului de cartonase rosii obtinut de fiecare echipa</string>
+    <string name="cartonase_rosii">Cartonase rosii</string>
+    <string name="introduceti_parola_pentru_confirmare">Introduceti parola pentru confirmare.</string>
+    <string name="parolele_introduse_nu_coincid">Parolele introduse nu coincid.</string>
+    <string name="intregistrare_efectuata_cu_succes">Inregistrarea s-a efectuat cu succes!</string>
+    <string name="email_deja_asociat_unui_cont">Acest email este deja asociat unui cont.</string>
 
 
     <string-array name="lv_sports_list">
         <item>Fotbal</item>
         <item>Handbal</item>
-        <!--        <item>Baschet</item>-->
         <item>Volei</item>
-        <!--        <item>Rugby</item>-->
-        <!--        <item>Baseball</item>-->
     </string-array>
 </resources>

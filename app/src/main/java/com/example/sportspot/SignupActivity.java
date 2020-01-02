@@ -57,9 +57,9 @@ public class SignupActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
 
-        if(mAuth.getCurrentUser() != null){
-//            user deja autentificat
-        }
+//        if(mAuth.getCurrentUser() != null){
+////            user deja autentificat
+//        }
 
     }
 
@@ -78,37 +78,37 @@ public class SignupActivity extends AppCompatActivity {
         String textConfirmPassword = signup_confirm_password.getText().toString().trim();
 
         if(textUsername.isEmpty()){
-            signup_username.setError("Introduceti un email.");
+            signup_username.setError(getString(R.string.introduceti_mail));
             signup_username.requestFocus();
             return;
         }
 
         if(!Patterns.EMAIL_ADDRESS.matcher(textUsername).matches()){
-            signup_username.setError("Introduceti o adresa email valida.");
+            signup_username.setError(getString(R.string.introduceti_mail_valid));
             signup_username.requestFocus();
             return;
         }
 
         if(textPassword.isEmpty()){
-            signup_password.setError("Introduceti o parola");
+            signup_password.setError(getString(R.string.introduceti_parola));
             signup_password.requestFocus();
             return;
         }
 
         if(textPassword.length()<6){
-            signup_password.setError("Introduceti o parola de minim 6 caractere.");
+            signup_password.setError(getString(R.string.introduceti_parola_6_caractere));
             signup_password.requestFocus();
             return;
         }
 
         if(textConfirmPassword.isEmpty()){
-            signup_confirm_password.setError("Introduceti parola pentru confirmare.");
+            signup_confirm_password.setError(getString(R.string.introduceti_parola_pentru_confirmare));
             signup_confirm_password.requestFocus();
             return;
         }
 
         if(!textPassword.matches(textConfirmPassword)){
-            signup_confirm_password.setError("Parolele introduse nu coincid.");
+            signup_confirm_password.setError(getString(R.string.parolele_introduse_nu_coincid));
             signup_confirm_password.requestFocus();
             return;
         }
@@ -121,14 +121,14 @@ public class SignupActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             //Inregistrarea s-a efectuat cu succes, se updateaza interfata
                             FirebaseUser user = mAuth.getCurrentUser();
-                            Toast.makeText(getApplicationContext(), "Inregistrarea s-a efectuat cu succes!", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), R.string.intregistrare_efectuata_cu_succes, Toast.LENGTH_SHORT).show();
                             intent = new Intent(SignupActivity.this, SportsListActivity.class);
                             startActivity(intent);
                             finish();
                         } else {
                             //Eroare la inregistrare
                             if(task.getException() instanceof FirebaseAuthUserCollisionException){
-                                Toast.makeText(getApplicationContext(), "Acest username este deja asociat unui cont.", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getApplicationContext(), R.string.email_deja_asociat_unui_cont, Toast.LENGTH_SHORT).show();
                             }
                             else{
                                 Toast.makeText(getApplicationContext(), task.getException().getMessage(), Toast.LENGTH_LONG).show();

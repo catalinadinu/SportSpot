@@ -73,7 +73,7 @@ public class RedCardsGraphReportActivity extends AppCompatActivity {
                         teamNamesResult = teamNamesResult + t.getCode() + " - " + t.getTeamName() + "\n";
                     }
 
-                    BarDataSet barDataSet = new BarDataSet(redCardsEntries, "Cartonase rosii");
+                    BarDataSet barDataSet = new BarDataSet(redCardsEntries, getString(R.string.cartonase_rosii));
                     barDataSet.setColors(ColorTemplate.VORDIPLOM_COLORS);
                     BarData barData = new BarData(barDataSet);
                     barData.setValueFormatter(new LargeValueFormatter());
@@ -82,7 +82,7 @@ public class RedCardsGraphReportActivity extends AppCompatActivity {
                     barChart.setTouchEnabled(true);
                     barChart.setDragEnabled(true);
                     barChart.setScaleEnabled(true);
-                    barChart.getDescription().setText("Reprezentarea grafica a numarului de cartonase rosii obtinut de fiecare echipa");
+                    barChart.getDescription().setText(getString(R.string.reprezentare_grafica_nr_cartonase_rosii));
 
                     XAxis xAxis = barChart.getXAxis();
                     xAxis.setValueFormatter(new IndexAxisValueFormatter(teamCodes));

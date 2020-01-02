@@ -91,25 +91,25 @@ public class AuthActivity extends AppCompatActivity {
         final String textParola = auth_password.getText().toString().trim();
 
         if(textMail.isEmpty()){
-            auth_username.setError("Introduceti o adresa email.");
+            auth_username.setError(getString(R.string.introduceti_mail));
             auth_username.requestFocus();
             return;
         }
 
         if(!Patterns.EMAIL_ADDRESS.matcher(textMail).matches()){
-            auth_username.setError("Introduceti o adresa email valida.");
+            auth_username.setError(getString(R.string.introduceti_mail_valid));
             auth_username.requestFocus();
             return;
         }
 
         if(textParola.isEmpty()){
-            auth_password.setError("Introduceti o parola");
+            auth_password.setError(getString(R.string.introduceti_parola));
             auth_password.requestFocus();
             return;
         }
 
         if(textParola.length()<6){
-            auth_password.setError("Introduceti o parola de minim 6 caractere.");
+            auth_password.setError(getString(R.string.introduceti_parola_6_caractere));
             auth_password.requestFocus();
             return;
         }

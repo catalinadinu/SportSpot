@@ -36,7 +36,7 @@ public class SportsReportsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_sports_reports);
 
         initComponents();
-        getCoachesFromDB();
+//        getCoachesFromDB();
 
         teamsReport.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -101,16 +101,16 @@ public class SportsReportsActivity extends AppCompatActivity {
 
 
 
-    @SuppressLint("StaticFieldLeak")
-    private void getCoachesFromDB() {
-        new CoachService.GetAllCoaches(getApplicationContext()){
-            @Override
-            protected void onPostExecute(List<Coach> coaches) {
-                if(coaches != null){
-                    coachesList.clear();
-                    coachesList.addAll(coaches);
-                }
-            }
-        }.execute();
-    }
+//    @SuppressLint("StaticFieldLeak")
+//    private void getCoachesFromDB() {
+//        new CoachService.GetAllCoaches(getApplicationContext()){
+//            @Override
+//            protected void onPostExecute(List<Coach> coaches) {
+//                if(coaches != null){
+//                    coachesList.clear();
+//                    coachesList.addAll(coaches);
+//                }
+//            }
+//        }.execute();
+//    }
 }

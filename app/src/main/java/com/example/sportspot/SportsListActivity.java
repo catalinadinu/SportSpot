@@ -37,18 +37,6 @@ public class SportsListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_sports_list);
         initComponents();
 
-//        new HttpManager(){
-//            @Override
-//            protected void onPostExecute(String s) {
-//                Toast.makeText(getApplicationContext(), "Se preiau datele...", Toast.LENGTH_SHORT).show();
-//                httpResponse = JsonParser.parseJson(s);
-//                if(httpResponse != null){
-//                    Toast.makeText(getApplicationContext(), "Datele despre rezultate au fost preluate.", Toast.LENGTH_SHORT).show();
-//                }
-//            }
-//        }.execute(URL);
-
-
         profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
