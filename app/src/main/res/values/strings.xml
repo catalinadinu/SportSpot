@@ -28,7 +28,7 @@
     <string name="listview_row_field_no_content">Nu exista date.</string>
     <string name="pdm_ase_ro">pdm.ase.ro</string>
     <string name="site">sau pe site:</string>
-    <string name="rapoarte_echipe">Rapoarte echipe</string>
+    <string name="rapoarte">Rapoarte</string>
     <string name="date_nepreluate">Datele nu au putut fi preluate</string>
     <string name="alegeti_sport">Alegeti sportul pentru care doriti vizualizarea raportului</string>
     <string name="raport_antrenori">Raport antrenori</string>
@@ -58,6 +58,7 @@
     <string name="parolele_introduse_nu_coincid">Parolele introduse nu coincid.</string>
     <string name="intregistrare_efectuata_cu_succes">Inregistrarea s-a efectuat cu succes!</string>
     <string name="email_deja_asociat_unui_cont">Acest email este deja asociat unui cont.</string>
+    <string name="csie_ase">CSIE ASE</string>
 
 
     <string-array name="lv_sports_list">
