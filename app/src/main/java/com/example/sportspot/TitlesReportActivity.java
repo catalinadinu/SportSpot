@@ -54,15 +54,20 @@ public class TitlesReportActivity extends AppCompatActivity {
                 FileOutputStream fos = null;
                 try{
                     fos = new FileOutputStream(file);
-                    fos.write(chosenSport.getBytes());
+                    String sport = chosenSport + "\n";
+                    fos.write(sport.getBytes());
                     for(Team t:returnedTeams){
-                        String victories = "Victorii: " + t.getVictories();
-                        String points = "Puncte: " + t.getPoints();
-                        String redCards = "Cartonase rosii: " + t.getRedCards();
-                        String titles = "Titulri: " + t.getTitlesNumber();
+                        String victories = "Victorii: " + t.getVictories() + "\n";
+                        String points = "Puncte: " + t.getPoints() + "\n";
+                        String redCards = "Cartonase rosii: " + t.getRedCards() + "\n";
+                        String titles = "Titulri: " + t.getTitlesNumber() + "\n";
 
-                        fos.write(t.getTeamName().getBytes());
-                        fos.write(t.getLeague().getBytes());
+                        String team = t.getTeamName() + "\n";
+                        fos.write(team.getBytes());
+
+                        String league = t.getLeague() + "\n";
+                        fos.write(league.getBytes());
+
                         fos.write(victories.getBytes());
                         fos.write(points.getBytes());
                         fos.write(redCards.getBytes());

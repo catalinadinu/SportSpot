@@ -56,11 +56,6 @@ public class SignupActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-
-//        if(mAuth.getCurrentUser() != null){
-////            user deja autentificat
-//        }
-
     }
 
     private void initComponents(){

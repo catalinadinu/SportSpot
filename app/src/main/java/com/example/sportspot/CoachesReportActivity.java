@@ -49,13 +49,16 @@ public class CoachesReportActivity extends AppCompatActivity {
                 FileOutputStream fos = null;
                 try{
                     fos = new FileOutputStream(file);
-                    fos.write(chosenSport.getBytes());
+                    String sport = chosenSport + "\n";
+                    fos.write(sport.getBytes());
                     for(Coach c:returnedCoaches){
-                        String age = "Varsta: " + c.getAge();
-                        String experience = "Experienta: " + c.getCoachingExperience();
+                        String age = "Varsta: " + c.getAge() + "\n";
+                        String experience = "Experienta: " + c.getCoachingExperience() + "\n";
+                        String name = c.getName() + "\n";
+                        String coachedTeam = c.getCurrentCoachedTeamName() + "\n";
 
-                        fos.write(c.getName().getBytes());
-                        fos.write(c.getCurrentCoachedTeamName().getBytes());
+                        fos.write(name.getBytes());
+                        fos.write(coachedTeam.getBytes());
                         fos.write(age.getBytes());
                         fos.write(experience.getBytes());
                     }

@@ -21,8 +21,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SportsListActivity extends AppCompatActivity {
-//    private static final String URL = "https://api.myjson.com/bins/1dfcnu";
-//    private HttpResponse httpResponse;
 
     private ListView sportsListView;
     private List<Game> selectedGame = new ArrayList<>();

@@ -21,7 +21,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SportsReportsActivity extends AppCompatActivity {
-    List<Coach> coachesList = new ArrayList<>();
     private Spinner sportsSpinner;
     private Button teamsReport;
     private Button coachesReport;
@@ -36,7 +35,6 @@ public class SportsReportsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_sports_reports);
 
         initComponents();
-//        getCoachesFromDB();
 
         teamsReport.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -98,19 +96,4 @@ public class SportsReportsActivity extends AppCompatActivity {
             }
         });
     }
-
-
-
-//    @SuppressLint("StaticFieldLeak")
-//    private void getCoachesFromDB() {
-//        new CoachService.GetAllCoaches(getApplicationContext()){
-//            @Override
-//            protected void onPostExecute(List<Coach> coaches) {
-//                if(coaches != null){
-//                    coachesList.clear();
-//                    coachesList.addAll(coaches);
-//                }
-//            }
-//        }.execute();
-//    }
 }
